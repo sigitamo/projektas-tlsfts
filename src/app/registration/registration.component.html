@@ -11,7 +11,7 @@
         #username=ngModel
         required>
         <span
-        *ngIf="username.touched"  
+        *ngIf="!username.valid && username.touched"  
         class="help-block">
             This field is required
         </span>
@@ -41,6 +41,11 @@
         name="phonenumber"
         required
         #phonenumber=ngModel>
+        <span
+        *ngIf="!phonenumber.valid && phonenumber.touched"  
+        class="help-block">
+            This field is required
+        </span>
       <label for="password">Password</label> 
       <input 
         type="password"

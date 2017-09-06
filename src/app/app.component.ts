@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -9,11 +10,15 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'app';
 
-  constructor(private router: Router) {}
 
-  onRegistration() {
-    this.router.navigate(['/registration'])
-  }
+
+  constructor(private router: Router,
+  private httpClient: HttpClient) {}
+
+
+  // onRegistration() {
+  //   this.router.navigate(['/registration'])
+  // }
 }
 
 
