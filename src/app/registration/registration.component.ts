@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, Validators, FormControl } from '@angular/forms';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-registration',
@@ -8,8 +8,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-
-results: string[];
  
 
   constructor(private httpClient: HttpClient) { }
@@ -38,16 +36,12 @@ results: string[];
     // const phonenumber = form.value.phonenumber;
     // const password = form.value.password;
     console.log(formUser);
-    this.httpClient.post('', null, {
-      params: new HttpParams().set('input', '123'),
-    })
-      .subscribe
-      (data => {
-        this.results = data['results']
-      }
-
-      )
-    console.log(this.results);
+    this.httpClient.post('http://localhost:8080/users', null, {
+      params: new HttpParams().set("input", "123456")
+    }).subscribe(resp => {
+      console.log(resp);
+    });
+    //console.log(this.results);
   
     // form.reset();
   }
