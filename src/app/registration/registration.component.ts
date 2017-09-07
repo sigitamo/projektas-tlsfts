@@ -38,10 +38,7 @@ export class RegistrationComponent implements OnInit {
     console.log(formUser);
     this.httpClient.post('http://localhost:8080/users', null, {
       params: new HttpParams().set("input", "123456")
-    }).subscribe(resp => {
-      console.log(resp);
-    });
-    //console.log(this.results);
+    }).subscribe();
   
     // form.reset();
   }
