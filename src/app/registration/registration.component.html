@@ -57,7 +57,22 @@
         #password=ngModel
         required
         minlength="6"> 
-               
+      <label for="passwordConfirm">Password Confirm</label> 
+      <input 
+          type="password"
+          id="passwordConfirm"
+          class="form-control"
+          ngModel 
+          passwordConfirm
+          name="passwordConfirm"
+          #passwordConfirm=ngModel
+          required
+          minlength="6"> 
+          <span
+          *ngIf="!password.value === passwordConfirm.value"  
+          class="help-block">
+              mismatch
+          </span>      
       <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SAVE</button>
   
     </form>
