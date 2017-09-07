@@ -36,6 +36,16 @@ export class RegistrationComponent implements OnInit {
     // const phonenumber = form.value.phonenumber;
     // const password = form.value.password;
     console.log(formUser);
+
+    var formData = {
+      username : formUser.value.username,
+      firstname : formUser.value.firstname,
+      lastname : formUser.value.lastname,
+      phonenumber : formUser.value.phonenumber,
+      password : formUser.value.password,
+      passwordConfirm : formUser.value.passwordConfirm
+    }
+
     this.httpClient.post('http://localhost:8080/users', null, {
       params: new HttpParams().set("input", "123456")
     }).subscribe();
