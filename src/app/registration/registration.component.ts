@@ -47,7 +47,7 @@ export class RegistrationComponent implements OnInit {
       email: formUser.value.email
     }
 
-    this.httpClient.post('http://localhost:8080/users',
+    this.httpClient.post('http://localhost:8080/register',
       JSON.stringify(formData), {responseType: 'text'})
       .subscribe()
       
