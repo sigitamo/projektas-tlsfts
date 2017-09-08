@@ -9,12 +9,14 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {LoggingInterceptor} from './logging-interceptor';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
-    LoginComponent
+    LoginComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
 
 
   loginUser() {
-    this.router.navigate([''])
+    this.router.navigate(['/map'])
   }
   onLogin(form: NgForm) {
     console.log('SUBMIT');
@@ -27,5 +27,6 @@ export class LoginComponent implements OnInit {
     const password = form.value.password;
     console.log(form);
     // form.reset();
+    this.loginUser();
   }
 }
