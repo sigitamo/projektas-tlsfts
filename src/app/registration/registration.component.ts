@@ -39,16 +39,15 @@ export class RegistrationComponent implements OnInit {
 
     var formData = {
       username : formUser.value.username,
-      firstname : formUser.value.firstname,
-      lastname : formUser.value.lastname,
-      phonenumber : formUser.value.phonenumber,
+      name : formUser.value.firstname,
+      surname : formUser.value.lastname,
       password : formUser.value.password,
-      passwordConfirm : formUser.value.passwordConfirm
+      phone : formUser.value.phonenumber
     }
 
-    this.httpClient.post('http://localhost:8080/users', null, {
-      params: new HttpParams().set("input", "123456")
-    }).subscribe();
+    this.httpClient.post('http://localhost:8080/users',
+      JSON.stringify(formData))
+    .subscribe();
   
     // form.reset();
   }
