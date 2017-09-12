@@ -9,16 +9,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'app';
-
-
-
-  constructor(private router: Router,
-  private httpClient: HttpClient) {}
-
-
-  // onRegistration() {
-  //   this.router.navigate(['/registration'])
-  // }
 }
 
 

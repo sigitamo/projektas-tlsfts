@@ -10,13 +10,15 @@ import { LoginComponent } from './login/login.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {LoggingInterceptor} from './logging-interceptor';
 import { MapComponent } from './map/map.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegistrationComponent,
     LoginComponent,
-    MapComponent
+    MapComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

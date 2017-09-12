@@ -1,87 +1,108 @@
 <div class="row">
-  <div class="col-md-12 col-xs-12">
+  <div class="col-md-8 col-xs-8 col-md-offset-2 col-xs-offset-2">
+    
+    <h4>REGISTRATION</h4>
+    <hr>
+
     <form (ngSubmit)="onRegistered(f)" #f="ngForm">
       <label for="username">User Name</label>
-      <input 
+      *<input 
         type="text" 
         id="username"
+        minlength="3"
+        maxlength="45"
         class="form-control"
         ngModel 
         username
         name="username"
         #username=ngModel
-        required>
-        <span
-        *ngIf="!username.valid && username.touched"  
-        class="help-block">
-            This field is required
-        </span>
+        >
+       
         <label for="email">Email</label>
-        <input 
+        *<input 
         type="email"
         class="form-control"
         id="email"
         email
-        ngModel 
+        maxlength="45"
+        ngModel
         name="email"
-        required>
+        #email=ngModel
+        required
+        pattern="^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$">
+
       <label for="firstname">First Name</label>
-      <input 
+      *<input 
         type="text" 
         id="firstname"
         class="form-control"
+        minlength="3"
+        maxlength="45"
         ngModel 
-        name="firstname">
+        name="firstname"
+        pattern="[a-zA-Z ]*">
+
       <label for="lastname">Last Name</label>
-      <input 
+      *<input 
         type="text"
         id="lastname"
         class="form-control"
+        minlength="3"
+        maxlength="45"
         ngModel 
-        name="lastname">
+        name="lastname"
+        pattern="[a-zA-Z ]*">
+
       <label for="phonenumber">Phone number</label>
-      <input 
-        type="text"
-        minlength="8"
+      <div> 
+        <span class="tel">+</span>
+        <input 
+        type="phone"
+        minlength="9"
         maxlength="14" 
         id="phonenumber"
         class="form-control"
         ngModel 
         name="phonenumber"
         required
-        #phonenumber=ngModel>
-        <span
-        *ngIf="!phonenumber.valid && phonenumber.touched"  
-        class="help-block">
-            This field is required
-        </span>
+        #phonenumber=ngModel
+        pattern="[0-9() ]{11,}$">
+      </div>
+     
       <label for="password">Password</label> 
       <input 
         type="password"
         id="password"
         class="form-control"
+        minlength="6"
+        maxlength="45"
         ngModel 
         password
         name="password"
         #password=ngModel
         required
-        minlength="6"> 
+        > 
+
       <label for="passwordConfirm">Password Confirm</label> 
       <input 
           type="password"
           id="passwordConfirm"
           class="form-control"
+          minlength="6"
+          maxlength="45"
           ngModel 
           passwordConfirm
           name="passwordConfirm"
           #passwordConfirm=ngModel
           required
-          minlength="6"> 
+          > 
           <span
-          *ngIf="!password.value === passwordConfirm.value"  
+          *ngIf="password.value != passwordConfirm.value"  
           class="help-block">
-              mismatch
-          </span>      
+            Re enter the password
+          </span> 
+          <hr>
+          <p>* - field is required</p>     
       <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SAVE</button>
   
     </form>

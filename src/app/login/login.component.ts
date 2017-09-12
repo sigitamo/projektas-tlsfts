@@ -20,6 +20,7 @@ export class LoginComponent implements OnInit {
   loginUser() {
     this.router.navigate(['/map'])
   }
+  
   onLogin(form: NgForm) {
     console.log('SUBMIT');
     
