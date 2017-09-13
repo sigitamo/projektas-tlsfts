@@ -7,7 +7,8 @@ import { ConfigService } from '../config.service';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.css']
+  styleUrls: ['./registration.component.css'],
+
 })
 
 export class RegistrationComponent implements OnInit {
@@ -17,7 +18,9 @@ export class RegistrationComponent implements OnInit {
   private fromConfig: ConfigService) { }
 
   ngOnInit() {
-    this.url = this.fromConfig.urlServer;
+    //this.url = '10.20.0.184';
+    this.url = this.fromConfig.urlServer.valueOf();
+    console.log(this.url);
   }
 
   onRegistered(form: NgForm) {

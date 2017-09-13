@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ConfigService } from '../config.service'; 
+
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,15 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+url = '';
+
 
   constructor(private router: Router,
-              private httpClient: HttpClient) { }
+              private httpClient: HttpClient,
+            private fromConfig: ConfigService) { }
 
   ngOnInit() {
+    this.url = this.fromConfig.urlServer.valueOf();
   }
 
 
@@ -29,7 +35,7 @@ export class LoginComponent implements OnInit {
       username: form.value.username,
       password: form.value. password
     }
-    this.httpClient.post('http://192.168.1.18:8080/login',
+    this.httpClient.post('http://' + this.url + ':8080/login',
     JSON.stringify(formLogin), {responseType: 'text'})
     .subscribe()
     // form.reset();
