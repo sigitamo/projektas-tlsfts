@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, Validators, FormControl, EmailValidator } from '@angular/forms';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
-
+import { ConfigService } from '../config.service';
 
 
 @Component({
@@ -10,14 +10,20 @@ import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./registration.component.css']
 })
 
-export class RegistrationComponent {
-  constructor(private httpClient: HttpClient) { }
+export class RegistrationComponent implements OnInit {
+  url = ''; 
+  
+  constructor(private httpClient: HttpClient,
+  private fromConfig: ConfigService) { }
 
+  ngOnInit() {
+    this.url = this.fromConfig.urlServer;
+  }
 
   onRegistered(form: NgForm) {
     console.log('SUBMIT');
     const formUser = new FormGroup({
-      username: new FormControl(form.value.username, [Validators.required, Validators.minLength(3)]),
+      username: new FormControl(form.value.username, [Validators.required, Validators.minLength(3), Validators.maxLength(45)]),
       firstname: new FormControl (form.value.firstname, Validators.minLength(3)),
       lastname: new FormControl(form.value.lastname, Validators.minLength(3)),
       phonenumber: new FormControl(form.value.phonenumber, Validators.minLength(8)),
@@ -45,9 +51,13 @@ export class RegistrationComponent {
       email: formUser.value.email
     }
 
-    this.httpClient.post('http://localhost:8080/register',
+    this.httpClient.post('http://' + this.url + ':8080/register',
       JSON.stringify(formData), {responseType: 'text'})
-      .subscribe()
+      .subscribe(
+        // response => {
+        //   console.log(response)
+        // }
+      )
         
   }
 

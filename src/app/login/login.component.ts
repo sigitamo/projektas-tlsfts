@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
       username: form.value.username,
       password: form.value. password
     }
-    this.httpClient.post('http://localhost:8080/login',
+    this.httpClient.post('http://192.168.1.18:8080/login',
     JSON.stringify(formLogin), {responseType: 'text'})
     .subscribe()
     // form.reset();

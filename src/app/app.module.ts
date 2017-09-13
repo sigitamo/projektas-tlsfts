@@ -11,6 +11,8 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {LoggingInterceptor} from './logging-interceptor';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
+import { HeaderComponent } from './header.component';
+import { ConfigService } from './config.service';
 
 @NgModule({
   declarations: [
@@ -19,18 +21,22 @@ import { HomeComponent } from './home/home.component';
     LoginComponent,
     MapComponent,
     HomeComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+  ],
+  exports: [
+    HeaderComponent
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: LoggingInterceptor,
     multi: true
-  }],
+  }, ConfigService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

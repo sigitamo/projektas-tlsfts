@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a routerLink="/" class="navbar-brand">Home PAGE</a>
+          </div>
+            <ul class="nav navbar-nav">
+              <li routerLinkActive="active"><a routerLink="/map">Map</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <!-- <ng-template [ngIf]="!authService.isAuthenticated()"> -->
+                <li><a routerLink="/registration" style="cursor:pointer;" routerLinkActive="active">REGISTER</a></li>
+                <li><a routerLink="/login" style="cursor:pointer;" routerLinkActive="active">LOGIN</a></li>
+              <!-- </ng-template> -->
+      
+              <li><a style="cursor: pointer;">Logout</a></li>
+            </ul>
+        
+        </div>
+      </nav>
+      
