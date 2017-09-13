@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, Validators, FormControl, EmailValidator } from '@angular/forms';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
+
 import { ConfigService } from '../config.service';
 
 
@@ -13,14 +16,19 @@ import { ConfigService } from '../config.service';
 
 export class RegistrationComponent implements OnInit {
   url = ''; 
+  // httpRes = this.httpResponse;
   
-  constructor(private httpClient: HttpClient,
-  private fromConfig: ConfigService) { }
+  constructor(
+        private httpClient: HttpClient,
+        private fromConfig: ConfigService,
+        private router: Router
+        // private httpResponse: HttpResponse<string>
+  ) { }
 
   ngOnInit() {
     //this.url = '10.20.0.184';
     this.url = this.fromConfig.urlServer.valueOf();
-    console.log(this.url);
+    // console.log(this.url);
   }
 
   onRegistered(form: NgForm) {
@@ -57,11 +65,19 @@ export class RegistrationComponent implements OnInit {
     this.httpClient.post('http://' + this.url + ':8080/register',
       JSON.stringify(formData), {responseType: 'text'})
       .subscribe(
-        // response => {
-        //   console.log(response)
-        // }
+        data => {
+          console.log(data);
+          this.router.navigate(['/map']);
+        },
+        (err: HttpErrorResponse) => {
+            console.log({err});
+            if({err}){
+              this.router.navigate(['/error']);
+            }             
+        }
+       
       )
-        
+      
   }
 
  

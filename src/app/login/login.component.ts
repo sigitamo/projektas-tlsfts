@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ConfigService } from '../config.service'; 
 
 
@@ -37,8 +37,16 @@ url = '';
     }
     this.httpClient.post('http://' + this.url + ':8080/login',
     JSON.stringify(formLogin), {responseType: 'text'})
-    .subscribe()
-    // form.reset();
-    this.loginUser();
-  }
+    .subscribe( data => {
+      console.log(data);
+      this.router.navigate(['/map']);
+    },
+    (err: HttpErrorResponse) => {
+        console.log({err});
+        if({err}){
+          this.router.navigate(['/error']);
+        }             
+    }
+   )
+     }
 }

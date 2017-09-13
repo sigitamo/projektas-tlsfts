@@ -13,6 +13,7 @@ import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header.component';
 import { ConfigService } from './config.service';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { ConfigService } from './config.service';
     MapComponent,
     HomeComponent,
     HeaderComponent,
+    ErrorComponent,
   ],
   imports: [
     BrowserModule,
