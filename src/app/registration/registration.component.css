@@ -8,3 +8,11 @@ input.ng-invalid.ng-touched {
     width: 97%;
     display: inline-block;
 }
+
+label {
+    margin-top: 25px;
+}
+
+span#forPhone {
+    color: grey;
+}

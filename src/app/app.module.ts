@@ -40,7 +40,8 @@ import { AuthService } from './auth.service';
     useClass: LoggingInterceptor,
     multi: true
   }, ConfigService,
-    AuthService],
+    AuthService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

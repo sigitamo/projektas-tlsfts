@@ -1,4 +1,4 @@
-import { Component, OnInit, Injectable } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, Validators, FormControl, EmailValidator } from '@angular/forms';
 import { HttpClient, HttpParams, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -8,7 +8,6 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { ConfigService } from '../config.service';
 import {  AuthService } from '../auth.service';
 
-@Injectable()
 
 @Component({
   selector: 'app-registration',
@@ -19,7 +18,7 @@ import {  AuthService } from '../auth.service';
 
 export class RegistrationComponent implements OnInit {
   url = ''; 
-  // httpRes = this.httpResponse;
+  
   
   constructor(
         private httpClient: HttpClient,
@@ -49,7 +48,7 @@ export class RegistrationComponent implements OnInit {
     function passwordMatchValidator(g: FormGroup) {
       return g.get('password').value === g.get('passwordConfirm').value ? null : {'mismatch': true};
   }
-    var passwordHash: string | Int32Array = Md5.hashStr(formUser.value.password.toString());
+    let passwordHash: string | Int32Array = Md5.hashStr(formUser.value.password.toString());
     // const username = form.value.username;
     // const firstname = form.value.firstname;
     // const lastname = form.value.lastname;
@@ -57,7 +56,7 @@ export class RegistrationComponent implements OnInit {
     // const password = form.value.password;
     console.log(formUser);
 
-    var formData  = {
+    let formData  = {
       username : formUser.value.username,
       name : formUser.value.firstname,
       surname : formUser.value.lastname,
@@ -78,7 +77,8 @@ export class RegistrationComponent implements OnInit {
         (err: HttpErrorResponse) => {
             console.log({err});
             if({err}){
-              this.router.navigate(['/error']);
+              // this.router.navigate(['/error']);
+              console.log(err.message);
             }             
         }
        

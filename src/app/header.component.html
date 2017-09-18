@@ -1,15 +1,17 @@
 <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a routerLink="/" class="navbar-brand">Home PAGE</a>
+            <a routerLink="/" class="navbar-brand">NAMŲ puslapis</a>
           </div>
             <ul class="nav navbar-nav">
-              <li routerLinkActive="active"><a routerLink="/map">Map</a></li>
+              <ng-template [ngIf]="authService.isAuthenticated()">
+              <li routerLinkActive="active"><a routerLink="/map">Žemėlapis</a></li>
+            </ng-template>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <ng-template [ngIf]="!authService.isAuthenticated()">
-                  <li><a routerLink="/registration" style="cursor:pointer;" routerLinkActive="active">REGISTER</a></li>
-                  <li><a routerLink="/login" style="cursor:pointer;" routerLinkActive="active">LOGIN</a></li>
+                  <li><a routerLink="/registration" style="cursor:pointer;" routerLinkActive="active">UŽSIREGISTRUOTI</a></li>
+                  <li><a routerLink="/login" style="cursor:pointer;" routerLinkActive="active">PRISIJUNGTI</a></li>
               </ng-template>
               
               <ng-template [ngIf]="authService.isAuthenticated()">

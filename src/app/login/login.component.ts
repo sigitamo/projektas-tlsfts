@@ -1,13 +1,11 @@
-import { Component, OnInit, Injectable } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { ConfigService } from '../config.service'; 
 import { Md5 } from 'ts-md5/dist/md5';
 
+import { ConfigService } from '../config.service'; 
 import { AuthService } from '../auth.service';
-
-@Injectable()
 
 @Component({
   selector: 'app-login',
@@ -34,12 +32,15 @@ url = '';
   
   onLogin(form: NgForm) {
     console.log('SUBMIT');
-    
-    var passwordHash: string | Int32Array = Md5.hashStr(form.value.password.toString());
+    const formUser = new FormGroup({
+      username: new FormControl(form.value.username),
+      password: new FormControl(form.value.password)
+    });
+    let passwordHash: string | Int32Array = Md5.hashStr(form.value.password.toString());
 
     console.log(form);
     var formLogin = {
-      username: form.value.username,
+      username: formUser.value.username,
       password: passwordHash
     }
     this.httpClient.post('http://' + this.url + ':8080/login',
@@ -52,8 +53,14 @@ url = '';
     (err: HttpErrorResponse) => {
         console.log({err});
         if({err}){
-          this.router.navigate(['/error']);
-        }             
+          let errorMessage = err.error.message;
+          // this.router.navigate(['/error']);
+          console.log(err.status, err.statusText, err.error);
+          return errorMessage;
+        } 
+        // else {
+        //   return 'Klaida';
+        // }            
     }
    )
      }
