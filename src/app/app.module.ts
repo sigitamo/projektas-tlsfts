@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header.component';
 import { ConfigService } from './config.service';
 import { ErrorComponent } from './error/error.component';
+import { AuthService } from './auth.service';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { ErrorComponent } from './error/error.component';
     provide: HTTP_INTERCEPTORS,
     useClass: LoggingInterceptor,
     multi: true
-  }, ConfigService],
+  }, ConfigService,
+    AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
