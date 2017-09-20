@@ -62,7 +62,7 @@ export class RegistrationComponent implements OnInit {
     }
 
 
-    this.httpClient.post('http://' + this.url + ':8080/register',
+    this.httpClient.post('http://' + this.url + '/register',
       JSON.stringify(formData), {responseType: 'text'})
       .subscribe(
         data => {

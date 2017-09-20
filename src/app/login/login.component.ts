@@ -14,7 +14,8 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
 url = '';
-
+errorMessage = '';
+eroorMessageRecieve = false;
 
   constructor(private router: Router,
               private httpClient: HttpClient,
@@ -43,7 +44,7 @@ url = '';
       username: formUser.value.username,
       password: passwordHash
     }
-    this.httpClient.post('http://' + this.url + ':8080/login',
+    this.httpClient.post('http://' + this.url + '/login',
     JSON.stringify(formLogin), {responseType: 'text'})
     .subscribe( data => {
       console.log(data);
@@ -53,12 +54,19 @@ url = '';
     (err: HttpErrorResponse) => {
         console.log({err});
         if({err}){
-          let errorMessage = err.error.message;
-         
-          console.log(err.status, err.statusText, err.error);
-          return errorMessage;
+          this.eroorMessageRecieve = true;
+          this.errorMessage = 'Neteisingai Įvestas vartotojo vardas arba slaptažodis';
+          
+          console.log(err.status, err.statusText, err.error, this.errorMessage);
+          
         } 
     }
    )
+     }
+
+     errorM() {
+       if(this.eroorMessageRecieve) {
+         return this.errorMessage;
+       }
      }
 }

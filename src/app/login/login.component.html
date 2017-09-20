@@ -27,10 +27,12 @@
         #password=ngModel
         required
         minlength="6"> 
-               
+           
+      <hr>
+
       <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SAVE</button>
       
-    
+      <span *ngIf="errorM"> {{ errorMessage }} </span>
 
     </form>
    
