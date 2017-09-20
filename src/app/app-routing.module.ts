@@ -13,13 +13,13 @@ const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
     {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
-    {path: 'not-found', component: PageNotFoundComponent},
-    {path: '**', redirectTo: '/not-found' }
 ];
 
 const authRoutes: Routes = [
     {path: 'registration', component: RegistrationComponent},
-    {path: 'login', component: LoginComponent},
+    {path: 'login', component: LoginComponent},    
+    {path: 'not-found', component: PageNotFoundComponent},
+    {path: '**', redirectTo: '/not-found' }
 ]
 
 @NgModule({
