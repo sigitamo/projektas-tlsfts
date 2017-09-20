@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-12 col-xs-12">
     
-    <h4>SignIn</h4>
+    <h4>PRISIJUNGTI</h4>
     <hr>
     
     <form (ngSubmit)="onLogin(f)" #f="ngForm">
-      <label for="username">User Name</label>
+      <label for="username">Vartotojo vardas</label>
       <input 
         type="text" 
         id="username"
@@ -16,7 +16,7 @@
         #username=ngModel
         required>
 
-      <label for="password">Password</label> 
+      <label for="password">Slaptažodis</label> 
       <input 
         type="password"
         id="password"
@@ -30,8 +30,8 @@
            
       <hr>
 
-      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SAVE</button>
-      
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
+      <hr>
       <span *ngIf="errorM"> {{ errorMessage }} </span>
 
     </form>

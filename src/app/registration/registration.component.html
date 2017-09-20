@@ -1,11 +1,11 @@
 <div class="row">
   <div class="col-md-8 col-xs-8 col-md-offset-2 col-xs-offset-2">
     
-    <h4>REGISTRATION</h4>
+    <h4>REGISTRACIJA</h4>
     <hr>
 
     <form (ngSubmit)="onRegistered(f)" #f="ngForm">
-      <label for="username">User Name *</label>
+      <label for="username">Vartotojo vardas *</label>
       <input 
         type="text" 
         id="username"
@@ -16,7 +16,7 @@
         #username=ngModel
         >
        
-        <label for="email">Email *</label>
+        <label for="email">El.paštas *</label>
         <input 
         type="email"
         class="form-control"
@@ -29,7 +29,7 @@
         required
         pattern="^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$">
 
-      <label for="firstname">First Name *</label>
+      <label for="firstname">Vardas *</label>
       <input 
         type="text" 
         id="firstname"
@@ -40,7 +40,7 @@
         name="firstname"
         pattern="[a-zA-Z ]*">
 
-      <label for="lastname">Last Name *</label>
+      <label for="lastname">Pavardė *</label>
       <input 
         type="text"
         id="lastname"
@@ -51,7 +51,7 @@
         name="lastname"
         pattern="[a-zA-Z ]*">
 
-      <label for="phonenumber">Phone number *</label>
+      <label for="phonenumber">Telefono numeris *</label>
       <div> 
         <span class="tel">+</span>
         <input 
@@ -68,7 +68,7 @@
       <span id=forPhone *ngIf="!phonenumber.valid">Parašome įvesti formatu pagal pavyzdį (37060012345)</span>
       </div>
      
-      <label for="password">Password</label> 
+      <label for="password">Slaptažodis</label> 
       <input 
         type="password"
         id="password"
@@ -82,7 +82,7 @@
         required
         > 
 
-      <label for="passwordConfirm">Password Confirm</label> 
+      <label for="passwordConfirm">Pakartokite slaptažodį</label> 
       <input 
           type="password"
           id="passwordConfirm"
@@ -104,7 +104,7 @@
           <p *ngIf="!f.valid">* - Privalomi laukai. Prašome visus užpildyti</p>     
           <hr>
       
-          <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SAVE</button>
+          <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
     </form>
     
   </div>
