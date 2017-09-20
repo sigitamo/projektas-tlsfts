@@ -6,14 +6,15 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
-import { ErrorComponent } from './error/error.component';
 import { AuthGuard } from './auth-guard.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
     {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
-    {path: 'error', component: ErrorComponent}
+    {path: 'not-found', component: PageNotFoundComponent},
+    {path: '**', redirectTo: '/not-found' }
 ];
 
 const authRoutes: Routes = [

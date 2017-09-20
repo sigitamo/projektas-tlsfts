@@ -49,11 +49,7 @@ export class RegistrationComponent implements OnInit {
       return g.get('password').value === g.get('passwordConfirm').value ? null : {'mismatch': true};
   }
     let passwordHash: string | Int32Array = Md5.hashStr(formUser.value.password.toString());
-    // const username = form.value.username;
-    // const firstname = form.value.firstname;
-    // const lastname = form.value.lastname;
-    // const phonenumber = form.value.phonenumber;
-    // const password = form.value.password;
+  
     console.log(formUser);
 
     let formData  = {
@@ -77,8 +73,7 @@ export class RegistrationComponent implements OnInit {
         (err: HttpErrorResponse) => {
             console.log({err});
             if({err}){
-              // this.router.navigate(['/error']);
-              console.log(err.message);
+               console.log(err.message);
             }             
         }
        

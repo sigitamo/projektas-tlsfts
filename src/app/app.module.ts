@@ -7,14 +7,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
-import {LoggingInterceptor} from './logging-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoggingInterceptor } from './logging-interceptor';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header.component';
 import { ConfigService } from './config.service';
-import { ErrorComponent } from './error/error.component';
 import { AuthService } from './auth.service';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { AuthService } from './auth.service';
     MapComponent,
     HomeComponent,
     HeaderComponent,
-    ErrorComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,7 +39,8 @@ import { AuthService } from './auth.service';
     provide: HTTP_INTERCEPTORS,
     useClass: LoggingInterceptor,
     multi: true
-  }, ConfigService,
+  }, 
+    ConfigService,
     AuthService,
   ],
   bootstrap: [AppComponent]

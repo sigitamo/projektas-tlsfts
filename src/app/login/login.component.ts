@@ -54,13 +54,10 @@ url = '';
         console.log({err});
         if({err}){
           let errorMessage = err.error.message;
-          // this.router.navigate(['/error']);
+         
           console.log(err.status, err.statusText, err.error);
           return errorMessage;
         } 
-        // else {
-        //   return 'Klaida';
-        // }            
     }
    )
      }
