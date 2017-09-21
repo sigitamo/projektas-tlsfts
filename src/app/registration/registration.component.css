@@ -1,11 +1,12 @@
-input.ng-invalid.ng-touched {
+/* input.ng-invalid.ng-touched {
     border: 1px solid red;
-}
-.tel {
+} */
+#telPlus {
     display: inline-block;
+    max-width: 3%;
 }
 #phonenumber{
-    width: 97%;
+    width: 95%;
     display: inline-block;
 }
 
@@ -13,10 +14,18 @@ label {
     margin-top: 25px;
 }
 
-span#forPhone {
+span {
     color: grey;
 }
 
 button { 
     margin-bottom: 25px;
+}
+
+.ng-valid[required], .ng-valid.required {
+    border-left: 5px solid green;
+}
+
+.ng-dirty:not(form) {
+    border-left: 5px solid red;
 }

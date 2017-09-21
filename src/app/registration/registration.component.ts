@@ -38,16 +38,14 @@ export class RegistrationComponent implements OnInit {
     console.log('SUBMIT');
     const formUser = new FormGroup({
       username: new FormControl(form.value.username, [Validators.required, Validators.minLength(3), Validators.maxLength(45)]),
-      firstname: new FormControl (form.value.firstname, Validators.minLength(3)),
+      firstname: new FormControl (form.value.firstname, [Validators.required, Validators.minLength(3)]),
       lastname: new FormControl(form.value.lastname, Validators.minLength(3)),
       phonenumber: new FormControl(form.value.phonenumber, Validators.minLength(8)),
       email: new FormControl(form.value.email, [Validators.required,Validators.email]),
       password: new FormControl(form.value.password, Validators.minLength(6)),
       passwordConfirm: new FormControl(form.value.passwordConfirm, Validators.minLength(6))
-    }, passwordMatchValidator);
-    function passwordMatchValidator(g: FormGroup) {
-      return g.get('password').value === g.get('passwordConfirm').value ? null : {'mismatch': true};
-  }
+    });
+   
     let passwordHash: string | Int32Array = Md5.hashStr(formUser.value.password.toString());
   
     console.log(formUser);

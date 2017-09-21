@@ -1,110 +1,124 @@
 <div class="row">
-  <div class="col-md-8 col-xs-8 col-md-offset-2 col-xs-offset-2">
+  <div class="col-md-8 col-sm-8 col-xs-8 col-md-offset-2 col-xs-offset-2 col-sm-offset-2">
     
     <h4>REGISTRACIJA</h4>
     <hr>
 
     <form (ngSubmit)="onRegistered(f)" #f="ngForm">
-      <label for="username">Vartotojo vardas *</label>
-      <input 
-        type="text" 
-        id="username"
-        class="form-control"
-        ngModel 
-        username
-        name="username"
-        #username=ngModel
-        >
        
-        <label for="email">El.paštas *</label>
+      <label for="username">Vartotojo vardas *</label>
         <input 
-        type="email"
-        class="form-control"
-        id="email"
-        email
-        maxlength="45"
-        ngModel
-        name="email"
-        #email=ngModel
-        required
-        pattern="^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$">
+          type="text" 
+          id="username"
+          class="form-control"
+          minlength="3"
+          maxlength="45"
+          ngModel 
+          name="username"
+          #username=ngModel
+          required>
+        <span *ngIf="!username.valid && username.touched">Įveskite vartotojo vardą</span>
+        <br>
+
+      <label for="email">El.paštas *</label>
+        <input 
+          type="email"
+          class="form-control"
+          id="email"
+          maxlength="45"
+          ngModel
+          name="email"
+          #email=ngModel
+          pattern="^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$"
+          required>
+        <span *ngIf="!email.valid && email.touched">Įveskite el.pašto adresą</span>
+        <br>
 
       <label for="firstname">Vardas *</label>
-      <input 
-        type="text" 
-        id="firstname"
-        class="form-control"
-        minlength="3"
-        maxlength="45"
-        ngModel 
-        name="firstname"
-        pattern="[a-zA-Z ]*">
+        <input 
+          type="text" 
+          id="firstname"
+          class="form-control"
+          minlength="3"
+          maxlength="45"
+          firstname
+          #firstname=ngModel
+          ngModel 
+          name="firstname"
+          pattern="[a-zA-Z0-9]+"
+          required>
+        <span *ngIf="!firstname.valid && firstname.touched">Įveskite Vardą</span>
+        <br>
 
       <label for="lastname">Pavardė *</label>
-      <input 
-        type="text"
-        id="lastname"
-        class="form-control"
-        minlength="3"
-        maxlength="45"
-        ngModel 
-        name="lastname"
-        pattern="[a-zA-Z ]*">
-
-      <label for="phonenumber">Telefono numeris *</label>
-      <div> 
-        <span class="tel">+</span>
         <input 
-        type="phone"
-        minlength="9"
-        maxlength="14" 
-        id="phonenumber"
-        class="form-control"
-        ngModel 
-        name="phonenumber"
-        required
-        #phonenumber=ngModel
-        pattern="[0-9() ]{11,}$">
-      <span id=forPhone *ngIf="!phonenumber.valid">Parašome įvesti formatu pagal pavyzdį (37060012345)</span>
-      </div>
-     
-      <label for="password">Slaptažodis</label> 
-      <input 
-        type="password"
-        id="password"
-        class="form-control"
-        minlength="6"
-        maxlength="45"
-        ngModel 
-        password
-        name="password"
-        #password=ngModel
-        required
-        > 
+          type="text"
+          id="lastname"
+          class="form-control"
+          minlength="3"
+          maxlength="45"
+          ngModel 
+          #lastname=ngModel
+          name="lastname"
+          pattern="[a-zA-Z ]*"
+          required>
+        <span *ngIf="!lastname.valid && lastname.touched">Įveskite pavardę</span>
+        <br>
 
-      <label for="passwordConfirm">Pakartokite slaptažodį</label> 
-      <input 
+      <label id="labelPlus" for="phonenumber">Telefono numeris *</label>
+        <div> 
+          <span id="telPlus">+</span>
+          <input 
+            type="phone"
+            minlength="9"
+            maxlength="14" 
+            id="phonenumber"
+            class="form-control"
+            ngModel 
+            name="phonenumber"
+            #phonenumber=ngModel
+            pattern="[0-9() ]{11,}$"
+            required>
+          <span id=forPhone *ngIf="!phonenumber.valid && phonenumber.touched">Įveskite telefono nr. (pvz: 37060012345)</span>
+        </div>
+        <br>
+     
+      <label for="password">Slaptažodis *</label> 
+        <input 
           type="password"
-          id="passwordConfirm"
+          id="password"
           class="form-control"
           minlength="6"
           maxlength="45"
           ngModel 
-          passwordConfirm
-          name="passwordConfirm"
-          #passwordConfirm=ngModel
-          required
-          > 
-          <span
-          *ngIf="password.value != passwordConfirm.value"  
-          class="help-block">
-            Pakartokite slaptažodį
-          </span> 
-         <hr>
-          <p *ngIf="!f.valid">* - Privalomi laukai. Prašome visus užpildyti</p>     
-          <hr>
+          password
+          name="password"
+          #password=ngModel
+          required> 
+        <span *ngIf="!password.valid && password.touched">Įveskite slaptažodį</span>
+        <br>
+
+      <label for="passwordConfirm">Pakartokite slaptažodį *</label> 
+        <input 
+            type="password"
+            id="passwordConfirm"
+            class="form-control"
+            minlength="6"
+            maxlength="45"
+            ngModel 
+            passwordConfirm
+            name="passwordConfirm"
+            #passwordConfirm=ngModel
+            required> 
+        <span *ngIf="password.value != passwordConfirm.value">Pakartokite slaptažodį</span> 
+        <br>
+        <br>
       
-          <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
+      <span *ngIf="!f.valid">* - privalomi laukai. <br> Prašome visus užpildyti</span>     
+      <hr>
+      
+      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
+
     </form>
     
   </div>
