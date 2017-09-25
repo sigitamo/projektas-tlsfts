@@ -13,8 +13,6 @@ export class MapComponent implements OnInit {
   lat: number = 54.698126;
   lng: number = 25.3190053;
 
-  // - apsidaryti get kas kelias sekundes ir atvaizduoti zem4lapyje
-
   constructor() { }
 
   ngOnInit() {

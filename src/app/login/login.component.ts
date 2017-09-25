@@ -53,13 +53,14 @@ eroorMessageRecieve = false;
     },
     (err: HttpErrorResponse) => {
         console.log({err});
-        if({err}){
+        if(err.status === 409){
           this.eroorMessageRecieve = true;
           this.errorMessage = 'Neteisingai Įvestas vartotojo vardas arba slaptažodis';
-          
-          console.log(err.status, err.statusText, err.error, this.errorMessage);
-          
+        } else  {
+          this.eroorMessageRecieve = true;
+          this.errorMessage = 'Sisteminė klaida';
         } 
+        console.log(err.status, err.statusText, err.error, this.errorMessage);
     }
    )
      }

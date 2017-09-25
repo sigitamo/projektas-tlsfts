@@ -8,11 +8,13 @@ import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuard } from './auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { GeoMapComponent } from './geo-map/geo-map.component';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
     {path: 'home', component: HomeComponent},
     {path: 'map', component: MapComponent, canActivate: [AuthGuard]},
+    {path: 'geo-map', component: GeoMapComponent}
 ];
 
 const authRoutes: Routes = [

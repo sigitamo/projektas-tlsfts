@@ -1,10 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AppComponent } from './app.component';
+
 import { AgmCoreModule } from '@agm/core';
 
-import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
@@ -16,6 +18,7 @@ import { HeaderComponent } from './header.component';
 import { ConfigService } from './config.service';
 import { AuthService } from './auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { GeoMapComponent } from './geo-map/geo-map.component';
 
 @NgModule({
   declarations: [
@@ -26,17 +29,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     HomeComponent,
     HeaderComponent,
     PageNotFoundComponent,
+    GeoMapComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    AgmCoreModule.forRoot({apiKey: 'AIzaSyBdpoVlT7F8kK5eX50grCeJLB-4BDyBLBo'})
-    
+    AgmCoreModule.forRoot({apiKey: 'AIzaSyBdpoVlT7F8kK5eX50grCeJLB-4BDyBLBo'}),
   ],
   exports: [
-    HeaderComponent
+    HeaderComponent,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,
@@ -44,8 +48,10 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     multi: true
   }, 
     ConfigService,
-    AuthService,
+    AuthService
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
+

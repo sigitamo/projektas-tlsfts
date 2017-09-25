@@ -31,7 +31,7 @@
           #email=ngModel
           pattern="^[a-zA-Z0-9_\-.]+@[a-zA-Z0-9\-]+\.[a-zA-Z0-9\-.]+$"
           required>
-        <span *ngIf="!email.valid && email.touched">Įveskite el.pašto adresą</span>
+        <span *ngIf="!email.valid && email.touched">Neteisingas el.pašto formatas</span>
         <br>
 
       <label for="firstname">Vardas *</label>
@@ -47,7 +47,7 @@
           name="firstname"
           pattern="[a-zA-Z0-9]+"
           required>
-        <span *ngIf="!firstname.valid && firstname.touched">Įveskite Vardą</span>
+        <span *ngIf="!firstname.valid && firstname.touched">Įveskite vardą, nemažiau kaip iš 3 raidžių</span>
         <br>
 
       <label for="lastname">Pavardė *</label>
@@ -62,7 +62,7 @@
           name="lastname"
           pattern="[a-zA-Z ]*"
           required>
-        <span *ngIf="!lastname.valid && lastname.touched">Įveskite pavardę</span>
+        <span *ngIf="!lastname.valid && lastname.touched">Įveskite pavardę, nemažiau kaip iš 3 raidžių</span>
         <br>
 
       <label id="labelPlus" for="phonenumber">Telefono numeris *</label>
