@@ -1,18 +1,17 @@
 <div class="row">
   <div class="col-md-12 col-xs-12">
-    
     <h4>PRISIJUNGTI</h4>
     <hr>
     
-    <form (ngSubmit)="onLogin(f)" #f="ngForm">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" [hidden]="submitted">
       <label for="username">Vartotojo vardas</label>
       <input 
         type="text" 
         id="username"
         class="form-control"
         ngModel 
-        username
         name="username"
+        username
         #username=ngModel
         required>
 
@@ -27,14 +26,15 @@
         #password=ngModel
         required
         minlength="6"> 
-           
       <hr>
-
-      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
+      <button (click)="submitted==false" class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
       <hr>
-      <span *ngIf="errorM"> {{ errorMessage }} </span>
-
+     
     </form>
-   
+    <!-- //Spinner after button submit -->
+      <app-loading-spinner *ngIf="submitted==true"></app-loading-spinner>
+    <!-- // Error Message -->
+      <span *ngIf="errorM"> {{ errorMessage }} </span>
+  
   </div>
 </div>

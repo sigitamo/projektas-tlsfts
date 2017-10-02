@@ -9,12 +9,12 @@ export class LoggingInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
-        console.log(req);
+        console.log('from loging-interceptors - req',req);
         return next
         .handle(req)
         .do(event => {
             if (event instanceof HttpResponse) {
-                console.log(event);
+                console.log('form logging-interceptor - event',event);
             }
         })
     }

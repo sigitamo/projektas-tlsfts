@@ -4,7 +4,7 @@
     <h4>REGISTRACIJA</h4>
     <hr>
 
-    <form (ngSubmit)="onRegistered(f)" #f="ngForm">
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm" [hidden]="submitted">
        
       <label for="username">Vartotojo vardas *</label>
         <input 
@@ -117,9 +117,15 @@
       <span *ngIf="!f.valid">* - privalomi laukai. <br> Prašome visus užpildyti</span>     
       <hr>
       
-      <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
+      <button (click)="submitted==false" class="btn btn-primary" type="submit" [disabled]="!f.valid">PATVIRTINTI</button>
 
     </form>
+
+     <!-- //Spinner after button submit -->
+     <app-loading-spinner *ngIf="submitted==true"></app-loading-spinner>
+     <!-- // Error Message -->
+       <span *ngIf="errorM"> {{ errorMessage }} </span>
+
     
   </div>
 </div>

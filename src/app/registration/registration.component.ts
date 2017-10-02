@@ -8,7 +8,6 @@ import { Md5 } from 'ts-md5/dist/md5';
 import { ConfigService } from '../config.service';
 import {  AuthService } from '../auth.service';
 
-
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -18,6 +17,9 @@ import {  AuthService } from '../auth.service';
 
 export class RegistrationComponent implements OnInit {
   url = ''; 
+  errorMessage = '';
+  eroorMessageRecieve = false;
+  submitted = false;
   
   
   constructor(
@@ -25,17 +27,16 @@ export class RegistrationComponent implements OnInit {
         private fromConfig: ConfigService,
         private router: Router,
         private authService: AuthService
-        // private httpResponse: HttpResponse<string>
   ) { }
 
   ngOnInit() {
-    //this.url = '10.20.0.184';
     this.url = this.fromConfig.urlServer.valueOf();
-    // console.log(this.url);
   }
 
-  onRegistered(form: NgForm) {
+  onSubmit(form: NgForm) {
     console.log('SUBMIT');
+    this.submitted = true;
+
     const formUser = new FormGroup({
       username: new FormControl(form.value.username, [Validators.required, Validators.minLength(3), Validators.maxLength(45)]),
       firstname: new FormControl (form.value.firstname, [Validators.required, Validators.minLength(3)]),
@@ -59,24 +60,30 @@ export class RegistrationComponent implements OnInit {
       email: formUser.value.email
     }
 
-
     this.httpClient.post('http://' + this.url + '/register',
       JSON.stringify(formData), {responseType: 'text'})
       .subscribe(
         data => {
-          console.log(data);
+          console.log('this is data - ', data);
           this.authService.sessionData = "!";
           this.router.navigate(['/map']);
         },
         (err: HttpErrorResponse) => {
             console.log({err});
             if({err}){
-               console.log(err.message);
+              this.eroorMessageRecieve = true;
+              this.submitted = false;
+              this.errorMessage = 'Sisteminė klaida. Bandykite jungtis vėliau';
+               console.log(this.errorMessage);
             }             
         }
-       
       )
-      
+  }
+
+  errorM() {
+    if(this.eroorMessageRecieve) {
+      return this.errorMessage;
+    }
   }
 
  
