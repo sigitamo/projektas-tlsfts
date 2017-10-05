@@ -1,7 +1,3 @@
-agm-map {
-    height: 500px;
-}
-
 .card{
     background-color: lightgrey;
     padding: 20px;
@@ -11,8 +7,4 @@ agm-map {
     background-color: white;
     padding: 15px;
     margin-bottom: 10px;
-}
-
-.gm-style {
-    color: red;
 }

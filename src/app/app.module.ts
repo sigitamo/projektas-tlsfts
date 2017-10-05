@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +20,7 @@ import { ConfigService } from './config.service';
 import { AuthService } from './auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
+import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     HomeComponent,
     HeaderComponent,
     PageNotFoundComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +41,7 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
     HttpClientModule,
     AppRoutingModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBdpoVlT7F8kK5eX50grCeJLB-4BDyBLBo'}),
+    AgmSnazzyInfoWindowModule
   ],
   exports: [
     HeaderComponent,

@@ -44,18 +44,14 @@ submitted = false;
 
     console.log(form);
     var formLogin = {
-      grant_type: 'password',
+     
       username: formUser.value.username,
-      password: formUser.value.password
+      password: passwordHash
     }
-    var reqHeaders = {
-      'postman-token' : '09a68fc6-4ab8-cc0e-18fe-119861f6facb',
-      'cache-control' : 'no-cache',
-      'content-type' : 'application/x-www-form-urlencoded'
-    }
+    
 
-    this.httpClient.post('http://web-app:secret@' + this.url + '/oauth/token',
-      JSON.stringify(formLogin), { headers: new HttpHeaders(reqHeaders), responseType: 'text'})
+    this.httpClient.post('http://' + this.url + '/login',
+      JSON.stringify(formLogin), {responseType: 'text'})
        .subscribe( data => {
          console.log(data);
         this.authService.sessionData = "thisLohin";
