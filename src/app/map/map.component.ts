@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AgmMap } from '@agm/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -30,7 +30,7 @@ interface user{
 export class MapComponent implements OnInit {
   url: string;
   //gooogle maps zoom level
-  zoom: number = 10;
+  zoom: number = 13;
   //initial center position for map
   lat: number = 54.698126;
   lng: number = 25.3190053;
@@ -38,6 +38,8 @@ export class MapComponent implements OnInit {
   markers:Array<marker>;
   users:Array<user>;
   index: number;
+
+  @ViewChild(AgmMap) myMap: AgmMap;
   
   
   constructor(private fromConfig: ConfigService,
@@ -59,15 +61,18 @@ export class MapComponent implements OnInit {
   }
 
   // info Marker in console, wich marker was clicked
-  clickedMarker(name: string, index: number){
+  clickedMarker(marker: marker, index: number){
     console.log('Marker was clicked: ${label || index}');
   }
 
-  markerClick(marker: marker, index: number) {
+  markerClick(lat: number, lng: number) {
     // let a = document.querySelector("a");
     // a.setAttribute("longitude", "latitude");
-    console.log('Markeris iš sąrašo '+ marker.name + ' ir ' + marker.lat);
-   
+    console.log('Markeris iš sąrašo ' + lat + lng);
+   this.lat = lat;
+   this.lng = lng;
+   this.myMap.triggerResize()
+    .then(() => (this.myMap as any)._mapsWrapper.setCenter({lat: lat, lng: lng}));
   }
 
 }

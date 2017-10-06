@@ -17,6 +17,11 @@ export interface Marker {
 export class MarkerService {
 baseUrl = ''; 
 url = ''; 
+marker = {
+  name: 'test',
+  lat: '',
+  lng: ''
+}
     constructor(
             private http: HttpClient, 
             private fromConfig: ConfigService) { }
@@ -35,6 +40,10 @@ url = '';
           params})
             .map(res => res as Marker[] || []);
    } 
+
+  //  getMarker(id: number) {
+  //    return this.marker.
+  //  }
    
 
 }

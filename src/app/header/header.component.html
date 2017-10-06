@@ -4,9 +4,9 @@
             <a routerLink="/" class="navbar-brand">NAMŲ puslapis</a>
           </div>
             <ul class="nav navbar-nav">
-              <!-- <ng-template [ngIf]="authService.isAuthenticated()"> -->
+              <ng-template [ngIf]="authService.isAuthenticated()">
               <li routerLinkActive="active"><a routerLink="/map">Žemėlapis</a></li>
-            <!-- </ng-template> -->
+            </ng-template>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <ng-template [ngIf]="!authService.isAuthenticated()">

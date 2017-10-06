@@ -1,7 +1,7 @@
 <div class="container-fluid"> 
     <div class="row">
       <div class="col-sm-8 main">
-        <agm-map 
+        <agm-map #gm
             [latitude]="lat" 
             [longitude]="lng"
             [zoom]="zoom"
@@ -28,7 +28,7 @@
       <div class="col-sm-4" *ngFor="let m of markers; let i=index">
         <div class="card">
             <div class="card-body">
-                <a  (click)="markerClick(m, i)" longitude="lng" latitude="lat"> 
+                <a  (click)="markerClick(m.lat, m.lng)" zoom="zoom"> 
                     <strong> {{ m.name }}</strong>
                     <p> Platuma: {{ m.lat }}</p>
                     <p> Ilguma: {{ m.lng }}</p>
