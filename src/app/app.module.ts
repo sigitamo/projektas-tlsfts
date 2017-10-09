@@ -21,6 +21,8 @@ import { AuthService } from './auth.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { GooglemapComponent } from './googlemap/googlemap.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HeaderComponent,
     PageNotFoundComponent,
     LoadingSpinnerComponent,
-    SidebarComponent
+    SidebarComponent,
+    GooglemapComponent,
+    UserComponent
   ],
   imports: [
     BrowserModule,

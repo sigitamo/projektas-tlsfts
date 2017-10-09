@@ -53,9 +53,15 @@ submitted = false;
     this.httpClient.post('http://' + this.url + '/login',
       JSON.stringify(formLogin), {responseType: 'text'})
        .subscribe( data => {
-         console.log(data);
-        this.authService.sessionData = "thisLohin";
-        this.router.navigate(['/map']);
+        if (data ==='[ROLE_ADMIN]'){
+          console.log(data);
+          this.authService.sessionData = "thisLohin";
+          this.router.navigate(['/map']);
+        } else if (data ==='[ROLE_USER]'){
+          this.authService.sessionData = "thisLohin";
+          this.router.navigate(['/']);
+        }
+      
       },
         (err: HttpErrorResponse) => {
           console.log({err});
