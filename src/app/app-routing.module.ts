@@ -23,7 +23,9 @@ const appRoutes: Routes = [
 const authRoutes: Routes = [
     {path: 'registration', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},    
-    {path: 'user', component: UserComponent},
+    {path: 'user', component: UserComponent,
+        // canActivate: [AuthGuard]
+    },
     {path: 'not-found', component: PageNotFoundComponent},
     {path: '**', redirectTo: '/not-found' }
 ]

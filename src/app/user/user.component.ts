@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 
 import { User } from './user';
+import { ConfigService } from '../config.service';
 
 @Component({
   selector: 'app-user',
@@ -9,8 +11,12 @@ import { User } from './user';
 })
 
 export class UserComponent implements OnInit {
-  users = USERS;
-  
+  users: any;
+  user_roles: String[];
+  url = '';
+  results: string[];
+  length: number;
+
   selectedUser: User;
 
   onSelect(user: User): void {
@@ -18,17 +24,30 @@ export class UserComponent implements OnInit {
   }
 
 
-  constructor() { }
+  constructor(
+        private fromConfig: ConfigService,
+        private httpClient: HttpClient,
+        ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.url = this.fromConfig.urlServer.valueOf();
+    this.httpClient.get('http://' + this.url + '/users')
+    .subscribe(
+      data => {
+        this.users = data;
+        console.log('this is users - ', this.users);
+        }, 
+      (err: HttpErrorResponse) => {
+        if(err.error instanceof Error) {
+          console.log('An error: ', err.error.message);
+        } else {
+          console.log(`Backend returned code:  ${err.status}, body was: ${err.error}`);
+        }
+        
+      })
   }
-
+  
+  
+  
 }
 
-const USERS: User[] = [
-  {id: 11, name: 'Inga'},
-  {id: 12, name: 'Milda'},
-  {id: 13, name: 'Tadas'},
-  {id: 14, name: 'Linas'},
-  {id: 15, name: 'Kostas'}
-]
