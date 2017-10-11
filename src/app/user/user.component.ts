@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { User } from './user';
 import { ConfigService } from '../config.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-user',
@@ -12,6 +14,8 @@ import { ConfigService } from '../config.service';
 
 export class UserComponent implements OnInit {
   users: any;
+  user: string;
+  groups: any;
   user_roles: String[];
   url = '';
   results: string[];
@@ -27,6 +31,8 @@ export class UserComponent implements OnInit {
   constructor(
         private fromConfig: ConfigService,
         private httpClient: HttpClient,
+        private userService: UserService,
+        private router: Router
         ) { }
 
   ngOnInit(): void {
@@ -45,9 +51,20 @@ export class UserComponent implements OnInit {
         }
         
       })
+
+      this.httpClient.get('http://' + this.url + '/groups')
+      .subscribe(
+        data => {
+          this.groups = data;
+          console.log('this is groups: ', this.groups);
+        }
+      )
   }
   
-  
+  onDeleteUser() {
+    this.userService.deleteUser(this.user);
+    this.router.navigate(['/adminpanel']);
+  }
   
 }
 

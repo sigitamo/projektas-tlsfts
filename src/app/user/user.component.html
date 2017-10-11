@@ -1,28 +1,38 @@
-<h2>Vartotojai</h2>
+<h3>Vartotojai</h3>
 
 <table id="userTable">
   <thead>
     <td>Vartotojo vardas</td>
     <td>El.paštas</td>
     <td>Telefono Nr.</td>
-    <td>Rolė</td>
+    <td>GRUPĖ</td>
+    <td>...</td>
 
   </thead>
   <tbody>
-    <tr *ngFor="let user of users">
+    <tr *ngFor="let user of users"
+    (click)="onSelect(user)">
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
       <td>{{user.phone}}</td>
-      <td>{{user.roles}}</td>
+      <td >
+        <select >
+          
+          <option *ngFor="let group of groups">{{group.name}}</option>
+       </select>
+     </td>
+     <!-- <td><button class="btn-danger" (click)="onDeleteUser(username)">x</button></td> -->
+    
     </tr>
    
   </tbody>
 </table>
-<div *ngIf="selectedUser">
+<!-- <div *ngIf="selectedUser">
   <h2>{{selectedUser.name}} details!</h2>
- 
+  
+  <button type="button" (click)="onDeleteUser()">Delete user</button>
   <div>
     <label>name: </label>
     <input [(ngModel)]="selectedUser.name" placeholder="name"/>
   </div>
-</div>
+</div> -->

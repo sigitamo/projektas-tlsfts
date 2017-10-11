@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
@@ -11,7 +12,6 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoggingInterceptor } from './logging-interceptor';
 import { MapComponent } from './map/map.component';
 import { HomeComponent } from './home/home.component';
@@ -23,6 +23,10 @@ import { LoadingSpinnerComponent } from './loading-spinner/loading-spinner.compo
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { GooglemapComponent } from './googlemap/googlemap.component';
 import { UserComponent } from './user/user.component';
+import { GroupComponent } from './group/group.component';
+import { GrouplistComponent } from './grouplist/grouplist.component';
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { UserService } from './user/user.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,10 @@ import { UserComponent } from './user/user.component';
     LoadingSpinnerComponent,
     SidebarComponent,
     GooglemapComponent,
-    UserComponent
+    UserComponent,
+    GroupComponent,
+    GrouplistComponent,
+    AdminpanelComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +63,8 @@ import { UserComponent } from './user/user.component';
     multi: true
   }, 
     ConfigService,
-    AuthService
+    AuthService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

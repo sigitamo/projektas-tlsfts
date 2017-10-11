@@ -10,6 +10,9 @@ import { AuthGuard } from './auth-guard.service';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { GooglemapComponent } from './googlemap/googlemap.component';
 import { UserComponent } from './user/user.component';
+import { GroupComponent } from './group/group.component';
+import { GrouplistComponent } from './grouplist/grouplist.component';
+import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -23,7 +26,14 @@ const appRoutes: Routes = [
 const authRoutes: Routes = [
     {path: 'registration', component: RegistrationComponent},
     {path: 'login', component: LoginComponent},    
-    {path: 'user', component: UserComponent,
+    {path: 'adminpanel', component: AdminpanelComponent,
+    // canActivate:[AuthGuard]
+    },
+    {path: 'grouplist', component: GrouplistComponent,
+        // canActivate: [AuthGuard]
+    },
+    {path: 'groups', component: GroupComponent},
+    {path: 'users', component: UserComponent,
         // canActivate: [AuthGuard]
     },
     {path: 'not-found', component: PageNotFoundComponent},
