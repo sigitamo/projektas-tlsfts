@@ -11,8 +11,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { GooglemapComponent } from './googlemap/googlemap.component';
 import { UserComponent } from './user/user.component';
 import { GroupComponent } from './group/group.component';
-import { GrouplistComponent } from './grouplist/grouplist.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
+import { GroupItemComponent } from './group/group-item/group-item.component';
 
 const appRoutes: Routes = [
     {path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -29,10 +29,8 @@ const authRoutes: Routes = [
     {path: 'adminpanel', component: AdminpanelComponent,
     // canActivate:[AuthGuard]
     },
-    {path: 'grouplist', component: GrouplistComponent,
-        // canActivate: [AuthGuard]
-    },
     {path: 'groups', component: GroupComponent},
+    {path: 'groups/:id', component: GroupItemComponent},
     {path: 'users', component: UserComponent,
         // canActivate: [AuthGuard]
     },

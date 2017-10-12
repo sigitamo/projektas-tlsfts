@@ -1,8 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
@@ -24,9 +24,10 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { GooglemapComponent } from './googlemap/googlemap.component';
 import { UserComponent } from './user/user.component';
 import { GroupComponent } from './group/group.component';
-import { GrouplistComponent } from './grouplist/grouplist.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { UserService } from './user/user.service';
+import { GroupItemComponent } from './group/group-item/group-item.component';
+
 
 @NgModule({
   declarations: [
@@ -42,8 +43,8 @@ import { UserService } from './user/user.service';
     GooglemapComponent,
     UserComponent,
     GroupComponent,
-    GrouplistComponent,
-    AdminpanelComponent
+    AdminpanelComponent,
+    GroupItemComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +65,7 @@ import { UserService } from './user/user.service';
   }, 
     ConfigService,
     AuthService,
-    UserService
+    UserService,
   ],
   bootstrap: [AppComponent]
 })

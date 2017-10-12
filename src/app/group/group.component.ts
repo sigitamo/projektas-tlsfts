@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-
+import { Subject } from 'rxjs/Subject';
 
 import { ConfigService } from '../config.service';
+import { Group } from './group';
 
 @Component({
   selector: 'app-group',
@@ -14,16 +15,38 @@ import { ConfigService } from '../config.service';
 })
 export class GroupComponent implements OnInit {
   url='';
-  // reloadParam : boolean = false;
+  groups: any;
+  groupName: string;
+  selectedGroup: Group;
+  groupsChanged = new Subject<GroupComponent[]>();
 
   constructor(
         private httpClient: HttpClient,
         private fromConfig: ConfigService,
-        private router: Router 
-      ) { }
+        private router: Router,
+        private route: ActivatedRoute, 
+  ) { }
 
   ngOnInit() {
     this.url = this.fromConfig.urlServer.valueOf();
+
+    this.httpClient.get('http://' + this.url + '/groups')
+    .subscribe(
+      data => {
+        this.groups = data;
+        console.log('this is users - ', this.groups);
+      }, 
+      (err: HttpErrorResponse) => {
+        if(err.error instanceof Error) {
+          console.log('GroupList error: ', err.error.message);
+        } else {
+          console.log(`GroupList Backend returned code:  ${err.status}, body was: ${err.error}`);
+        }
+      });
+  }
+
+  trackByName(index, group) {
+    return group.name;
   }
 
   onSubmit(form: NgForm) {
@@ -38,11 +61,9 @@ export class GroupComponent implements OnInit {
      .subscribe(
        data=> {
          console.log(data);
-        //  this.reloadParam = !this.reloadParam;
-        // location.reload();
-       //this.router.navigate(['/grouplist']);
-   
-         
+      //this push new groupName to array without reload
+       this.groups.push({name: groupName});
+        console.log('po sukurimo grupes',this.groups);
        },
        (err: HttpErrorResponse) => {
         if(err.error instanceof Error) {
@@ -52,10 +73,38 @@ export class GroupComponent implements OnInit {
         }
       });
       form.reset();
-     
-     
   }
 
+  onDelete(index: number ) {
+    var groupName = this.groups[index].name.valueOf();
+    this.httpClient.delete('http://' + this.url + '/group', {
+      params: new HttpParams().set('name', groupName)
+    }).subscribe(
+      resp => {
+        this.groups.splice(index, 1);
+        this.groupsChanged.next(this.groups.slice());
+        console.log(this.groups);
+        if (resp !instanceof HttpErrorResponse) {
   
+        }
+        console.log('delete', groupName);
+      }
+    );
+  }
+
+  getGroup(index: number) {
+    var groupName = this.groups[index].name.valueOf();
+    this.httpClient.get('http://' + this.url + '/group', {
+      params: new HttpParams().set('name', groupName)
+    }).subscribe(
+      data => {
+        this.selectedGroup = <Group>data;
+        console.log('getGroup', groupName);
+      }
+    );
+   
+  }
+
+ 
 
 }
