@@ -15,12 +15,12 @@
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
       <td>{{user.phone}}</td>
-      <td >
-        <select >
-          
-          <option *ngFor="let group of groups">{{group.name}}</option>
+      <td>
+        <select (click)="onSelectGroup(i)">
+          <option *ngFor="let group of groups; let i = index">{{group.name}}</option>
        </select>
      </td>
+     <td *ngIf="selectedGroup" >{{group[i].name}}</td>
      <!-- <td><button class="btn-danger" (click)="onDeleteUser(username)">x</button></td> -->
     
     </tr>

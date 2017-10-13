@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 import { User } from './user';
+import { Group } from '../group/group';
 import { ConfigService } from '../config.service';
 import { UserService } from './user.service';
 
@@ -15,16 +16,25 @@ import { UserService } from './user.service';
 export class UserComponent implements OnInit {
   users: any;
   user: string;
+  group: string;
   groups: any;
   user_roles: String[];
   url = '';
   results: string[];
   length: number;
+  index: number;
 
   selectedUser: User;
+  selectedGroup: Group;
 
   onSelect(user: User): void {
     this.selectedUser = user;
+  }
+
+  //////UNDEFINED
+  onSelectGroup(group: Group, index: number, name: string) {
+    this.selectedGroup = group;
+    console.log('grupė pažymėta', this.selectedGroup);
   }
 
 

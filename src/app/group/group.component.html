@@ -34,7 +34,7 @@
             <span>sk.: {{group.members}}</span>
             <button class="btn btn-danger" type="button" (click)="onDelete(i)">Trinti</button>
         </li>
-        <hr>
+      
     </ul>
 </div>
 
@@ -66,5 +66,5 @@
 
 <hr>
 <!-- // Input from group-item.coponent.html   -->
-<app-group-item *ngIf="selectedGroup" [group]="selectedGroup"></app-group-item>
+<app-group-item *ngIf="selectedGroup" [group]="selectedGroup" [users]="users" [username]="[username]"></app-group-item>
 <!-- <a *ngFor="let group of groups" [routerLink]="['/groups', group.id]">Grupės info</a> -->

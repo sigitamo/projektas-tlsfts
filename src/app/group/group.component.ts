@@ -7,6 +7,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { ConfigService } from '../config.service';
 import { Group } from './group';
+import { User } from '../user/user';
 
 @Component({
   selector: 'app-group',
@@ -16,6 +17,7 @@ import { Group } from './group';
 export class GroupComponent implements OnInit {
   url='';
   groups: any;
+  users: any;
   groupName: string;
   selectedGroup: Group;
   groupsChanged = new Subject<GroupComponent[]>();
@@ -42,7 +44,14 @@ export class GroupComponent implements OnInit {
         } else {
           console.log(`GroupList Backend returned code:  ${err.status}, body was: ${err.error}`);
         }
-      });
+      })
+      this.httpClient.get('http://' + this.url + '/users')
+      .subscribe(
+        data => {
+          this.users = data;
+          console.log('this is users in groups: ', this.users);
+        }
+      )
   }
 
   trackByName(index, group) {
@@ -77,6 +86,9 @@ export class GroupComponent implements OnInit {
 
   onDelete(index: number ) {
     var groupName = this.groups[index].name.valueOf();
+    var groupMembersCount = this.groups[index].members.valueOf();
+    console.log('GRUPĖ TURI : ',groupMembersCount, 'NARIŲ');
+   if(groupMembersCount == 0) {
     this.httpClient.delete('http://' + this.url + '/group', {
       params: new HttpParams().set('name', groupName)
     }).subscribe(
@@ -90,16 +102,29 @@ export class GroupComponent implements OnInit {
         console.log('delete', groupName);
       }
     );
+ 
+   } else {
+    console.log('AR TIKRAI NORITE IŠTRINTI GRUPĘ?');
+   }
+    
   }
 
   getGroup(index: number) {
     var groupName = this.groups[index].name.valueOf();
+    // var groupUsernames = this.groups[index].usernames;
     this.httpClient.get('http://' + this.url + '/group', {
       params: new HttpParams().set('name', groupName)
     }).subscribe(
       data => {
         this.selectedGroup = <Group>data;
         console.log('getGroup', groupName);
+        var groupUsernames = this.selectedGroup.usernames;
+        for (var index = 0; index < groupUsernames.length; index++) {
+          var username = groupUsernames[index];
+          console.log('USERNAMEs', username);
+          
+        }
+
       }
     );
    
