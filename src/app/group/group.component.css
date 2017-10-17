@@ -11,6 +11,6 @@
 #groupList li button {
     min-width: 70px;
 }
-.modal-backdrop  {
+.modal-backdrop.show  {
     background-color: transparent;
 }

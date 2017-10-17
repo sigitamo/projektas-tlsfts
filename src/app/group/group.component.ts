@@ -142,6 +142,10 @@ export class GroupComponent implements OnInit {
     console.log('kk')
     
   }
+  onNo() {
+    var closeModal = document.getElementById("exampleModal").setAttribute("class", "hide")
+  }
+
 
  openDialog(): void {
   let dialogRef = this.dialog.open(DialogGroupsText, {
