@@ -20,10 +20,12 @@ export class GroupItemComponent implements OnInit {
  userName: string;
  selectedUserName: string;
 
+
  
   @Input() group: Group;
   @Input() users: User[];
   @Input() username: User;
+  @Input() groups: Group[];
 
 
 
@@ -49,17 +51,22 @@ export class GroupItemComponent implements OnInit {
         userName: new FormControl(form.value.username)
       });
   
-      var groupname = form.value.groupname;
+      var groupname = this.group.name;
       var username = form.value.username;
 
       this.httpClient.post('http://' + this.url + '/group/addUser', JSON.stringify({groupname, username}), {responseType: 'text'})
       .subscribe(
         data=> {
-          console.log(data);
+          // username = data.valueOf();
+          console.log('data is: ', groupname);
        //this push new groupName to array without reload
-        // this.groups.push({name: groupName});
+      //  this.groupname.push(username);
+      
         //  console.log('po sukurimo grupes',this.groups);
         })
+         
+        
+        form.reset();
     }
 
     onSelectUser(user: string) {

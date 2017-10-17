@@ -2,69 +2,46 @@
 <form (ngSubmit)="onSubmit(f)" #f="ngForm" [hidden]="submitted">
   <label for="groupName">Grupės vardas</label>
   <input 
-    type="text" 
-    id="groupName"
-    class="form-control"
-    ngModel 
-    name="groupName"
-    groupName
-    #groupName=ngModel
-    required>
-
-   <hr>
+        type="text" 
+        id="groupName"
+        class="form-control"
+        ngModel 
+        name="groupName"
+        groupName
+        #groupName=ngModel
+        required>
+  <hr>
   <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SUKURTI</button>
   <hr>
-  
- 
 </form>
 
-
-
-
 <h3>Grupių sąrašas</h3>
-<div>
-    <ul id=groupList *ngFor="let group of groups; let i=index; trackBy: trackByName" 
-   
-    [class.selected]="group === selectedGroup">
-        <li>
-            <a (click)="getGroup(i)"
-         >
-            <span>{{group.name}}</span> 
-        </a>    
-            <span>sk.: {{group.members}}</span>
-            <button class="btn btn-danger" type="button" (click)="onDelete(i)">Trinti</button>
-        </li>
-      
-    </ul>
+<div class="row">
+    <div class="col-md-6">
+        <div class="card">
+            <ul class="list-group list-group-flush" id=groupList *ngFor="let group of groups; let i=index; trackBy: trackByName" >
+                <li>
+                    <a class="list-group-item list-group-item-action" routerLinkActive="active" style="cursor: pointer;" (click)="getGroup(i)"> 
+                        <span>{{group.name}}</span> 
+                        <span>sk.: {{group.members}}</span>
+                    </a>
+                        <button 
+                        class="btn btn-danger" 
+                        type="button" 
+                        (click)="onDelete(i)"
+                     
+                        >Trinti</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <app-group-item *ngIf="selectedGroup" [group]="selectedGroup" [users]="users" [username]="[username]"></app-group-item>
+    </div>
 </div>
 
 
-
-
-<!-- <li *ngFor="let group of groups"
-    (click)="onSelectGroup(group)">
-<span>{{group.name}}</span>
-<button class="btn btn-danger"
-    (click)="delete(group);
-    $event.stopPropagation()">x</button>
-
-
-</li>
-
-<div *ngIf="selectedGroup">
-    <h2>{{selectedGroup.name}} mano grupė!</h2>
-    <button (click)="gotoGroup()">Peržiūrėti grupę</button>
-    
-  </div>
-
-  <div>
-    <label>Groupės pavadinimas:</label> <input #groupName />
-    <button (click)="add(groupName.value); groupName.value=''">
-    Pridėti
-    </button>
-  </div> -->
-
 <hr>
 <!-- // Input from group-item.coponent.html   -->
-<app-group-item *ngIf="selectedGroup" [group]="selectedGroup" [users]="users" [username]="[username]"></app-group-item>
-<!-- <a *ngFor="let group of groups" [routerLink]="['/groups', group.id]">Grupės info</a> -->
+
+

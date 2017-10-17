@@ -1,0 +1,16 @@
+#groupItem {
+    padding: 20px;
+    background-color: lightgray;
+}
+#groupItem span {
+    width: 50%;
+    font-size: 12px;
+
+}
+#groupItem h4 {
+   font-weight: 700;
+}
+
+#groupItem li {
+    list-style: none;
+}

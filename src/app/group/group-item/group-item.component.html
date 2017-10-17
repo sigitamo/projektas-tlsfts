@@ -1,23 +1,16 @@
-<div >
-    <h4>Grupės pavadinimas: {{group.name}}</h4>
-    <div>narių kiekis {{group.members}}</div>
-  <p>Grupės nariai: {{group.usernames}}</p>
-  <ul *ngFor="let name of group.usernames; let i=index;">
-    <li>vardas vartotojo: {{name}}</li>
-  </ul>
-
-    <!-- <div>
-      <label>name: </label>
-      <input [(ngModel)]="group.name" placeholder="name"/>
-    </div> -->
-    
-
+<div id="groupItem">
+    <h4><span>Grupė: </span>   {{group.name}}</h4>
+    <!-- <p>Grupės nariai: {{group.usernames}}</p> -->
+     <ul *ngFor="let name of group.usernames; let i=index;">
+        <li>{{name}}</li>
+    </ul>
+    <h5><span>Viso narių: </span>  {{group.members}}: </h5>   
+    <hr>
     <div>
-      <h3>Pridėti narių</h3>
+      <h4>Pridėti narių</h4>
       <form (ngSubmit)="addUser(f)" #f="ngForm">
-          <label for="user">Visi VARTOTOJAI</label>
+          <label for="user"></label>
           <select 
-                
                 type="text" 
                 id="username"
                 class="form-control"
@@ -25,16 +18,15 @@
                 name="username"
                 username
                 #username=ngModel
-                (change)="onSelectUser($event.target.value)"
-            >
-            <option *ngFor="let user of users; let i = index; trackBy: trackByName"  >{{user.username}}</option>
+                (change)="onSelectUser($event.target.value)">
+             <option *ngFor="let user of users; let i = index; trackBy: trackByName"  >{{user.username}}</option>
          </select>
          
         
-         <br>
+         <!-- <br>
 
           <label for="groupname">Grupė: </label>
-          <input name="groupname" groupname #groupname=ngModel [(ngModel)]="group.name" placeholder="name"/>
+          <input name="groupname" groupname #groupname=ngModel [(ngModel)]="group.name" placeholder="name"/> -->
       
          <hr>
         <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button>

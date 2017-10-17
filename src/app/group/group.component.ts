@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { ConfigService } from '../config.service';
 import { Group } from './group';
 import { User } from '../user/user';
+
 
 @Component({
   selector: 'app-group',
@@ -21,13 +23,16 @@ export class GroupComponent implements OnInit {
   groupName: string;
   selectedGroup: Group;
   groupsChanged = new Subject<GroupComponent[]>();
+  text: string;
 
   constructor(
         private httpClient: HttpClient,
         private fromConfig: ConfigService,
         private router: Router,
         private route: ActivatedRoute, 
+        public dialog: MatDialog
   ) { }
+
 
   ngOnInit() {
     this.url = this.fromConfig.urlServer.valueOf();
@@ -53,6 +58,7 @@ export class GroupComponent implements OnInit {
         }
       )
   }
+  
 
   trackByName(index, group) {
     return group.name;
@@ -88,7 +94,7 @@ export class GroupComponent implements OnInit {
     var groupName = this.groups[index].name.valueOf();
     var groupMembersCount = this.groups[index].members.valueOf();
     console.log('GRUPĖ TURI : ',groupMembersCount, 'NARIŲ');
-   if(groupMembersCount == 0) {
+  
     this.httpClient.delete('http://' + this.url + '/group', {
       params: new HttpParams().set('name', groupName)
     }).subscribe(
@@ -103,9 +109,7 @@ export class GroupComponent implements OnInit {
       }
     );
  
-   } else {
-    console.log('AR TIKRAI NORITE IŠTRINTI GRUPĘ?');
-   }
+   
     
   }
 
@@ -130,6 +134,41 @@ export class GroupComponent implements OnInit {
    
   }
 
- 
+ openDialog(): void {
+  let dialogRef = this.dialog.open(DialogGroupsText, {
+    width: '250px',
+    data: {text: 'TRINTI'}
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log('The dialog was closed');
+    this.text = result;
+  })
+ }
 
 }
+
+
+@Component({
+  selector: 'app-dialog-groups-text',
+  templateUrl: './dialog-groups-text.html'  
+})
+export class DialogGroupsText {
+  
+    
+  
+    constructor(
+        public dialogRef: MatDialogRef<DialogGroupsText>,
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private groupComponent: GroupComponent) { }
+  
+    onNoClick(): void {
+      this.dialogRef.close();
+    }
+    onDelete(index: number): void {
+      this.groupComponent.onDelete(index);
+      console.log(index);
+      this.dialogRef.close();
+    }
+  
+  }

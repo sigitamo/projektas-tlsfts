@@ -1,10 +1,13 @@
 #groupList li {
-    list-style: none   
+    list-style: none;
+    
+    
+     
 }
-#groupList li span {
+#groupList li a {
     display: inline-block;
-    min-width: 150px;
+    min-width: 50%;
 }
-#groupList li span+span {
+#groupList li button {
     min-width: 70px;
 }
