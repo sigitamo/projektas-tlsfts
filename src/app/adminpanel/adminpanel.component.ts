@@ -10,12 +10,16 @@ export class AdminpanelComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    
+    let users = document.getElementById("home").setAttribute("class", "active");
+    let homeTab = document.getElementById("home-tab").setAttribute("class", "nav-link active");
   }
 
   onClickUser(event){
+
     let groups = document.getElementById("profile").setAttribute("class", "tab-pane");  
+    let profileTab = document.getElementById("profile-tab").setAttribute("class", "nav-link");
     let users = document.getElementById("home");
+    let homeTab = document.getElementById("home-tab").setAttribute("class", "nav-link active");
      
         let att = users.getAttribute("class");
         if (!att.includes("active")) {
@@ -26,7 +30,9 @@ export class AdminpanelComponent implements OnInit {
 
   onClickGroup(event) {
     let users = document.getElementById("home").setAttribute("class", "tab-pane");
-    let groups = document.getElementById("profile").setAttribute("class", "tab-pane active")
+    let homeTab = document.getElementById("home-tab").setAttribute("class", "nav-link"); 
+    let groups = document.getElementById("profile").setAttribute("class", "tab-pane active");
+    let profileTab = document.getElementById("profile-tab").setAttribute("class", "nav-link active");
    
   }
 

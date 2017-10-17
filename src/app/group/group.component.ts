@@ -132,6 +132,15 @@ export class GroupComponent implements OnInit {
       }
     );
    
+
+    
+  }
+  onClick(event) {
+    var modalOpen = document.getElementById("exampleModal").setAttribute("class", "show")
+   
+   
+    console.log('kk')
+    
   }
 
  openDialog(): void {

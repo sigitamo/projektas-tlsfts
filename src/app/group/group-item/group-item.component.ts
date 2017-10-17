@@ -58,20 +58,22 @@ export class GroupItemComponent implements OnInit {
       .subscribe(
         data=> {
           // username = data.valueOf();
-          console.log('data is: ', groupname);
-       //this push new groupName to array without reload
-      //  this.groupname.push(username);
-      
-        //  console.log('po sukurimo grupes',this.groups);
+          console.log('username: ', username, 'was added');
+     //this push username to selected group(in group.ts was changed constructor -> usernames: String[])     
+      this.group.usernames.push(username);
+        console.log('new users array: ', this.group.usernames, 'Group:', groupname);
+       
         })
          
-        
+       
         form.reset();
     }
 
     onSelectUser(user: string) {
-      console.log(user + ' was selected')
+     
       this.selectedUserName = user;
+      console.log(user + ' was selected');
+      return this.selectedUserName;
     }
   
 }

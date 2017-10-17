@@ -1,47 +1,83 @@
-<h3>Kurti naują grupę</h3>
-<form (ngSubmit)="onSubmit(f)" #f="ngForm" [hidden]="submitted">
-  <label for="groupName">Grupės vardas</label>
-  <input 
-        type="text" 
-        id="groupName"
-        class="form-control"
-        ngModel 
-        name="groupName"
-        groupName
-        #groupName=ngModel
-        required>
-  <hr>
-  <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SUKURTI</button>
-  <hr>
-</form>
+<div id="modalOn">
 
-<h3>Grupių sąrašas</h3>
-<div class="row">
-    <div class="col-md-6">
-        <div class="card">
-            <ul class="list-group list-group-flush" id=groupList *ngFor="let group of groups; let i=index; trackBy: trackByName" >
-                <li>
-                    <a class="list-group-item list-group-item-action" routerLinkActive="active" style="cursor: pointer;" (click)="getGroup(i)"> 
-                        <span>{{group.name}}</span> 
-                        <span>sk.: {{group.members}}</span>
-                    </a>
-                        <button 
-                        class="btn btn-danger" 
-                        type="button" 
-                        (click)="onDelete(i)"
-                     
-                        >Trinti</button>
-                </li>
-            </ul>
+    <h3>Kurti naują grupę</h3>
+    <div class="row">
+        <div class="col-md-6 col-xs-6">
+            <form (ngSubmit)="onSubmit(f)" #f="ngForm" [hidden]="submitted">
+                <label for="groupName">Grupės vardas</label>
+                <input 
+                      type="text" 
+                      id="groupName"
+                      class="form-control"
+                      ngModel 
+                      name="groupName"
+                      groupName
+                      #groupName=ngModel
+                      required>
+                <hr>
+                <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SUKURTI</button>
+                <hr>
+              </form>
         </div>
     </div>
-    <div class="col-md-6">
-        <app-group-item *ngIf="selectedGroup" [group]="selectedGroup" [users]="users" [username]="[username]"></app-group-item>
+    
+    
+    <h3>Grupių sąrašas</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <ul class="list-group list-group-flush" id=groupList *ngFor="let group of groups; let i=index; trackBy: trackByName" >
+                    <li>
+                        <a class="list-group-item list-group-item-action" routerLinkActive="active" style="cursor: pointer;" (click)="getGroup(i)"> 
+                            <span>{{group.name}}</span> 
+                            <span>sk.: {{group.members}}</span>
+                        </a>
+                            <!-- <button 
+                            class="btn btn-danger" 
+                            type="button" 
+                            (click)="onDelete(i)"
+                         
+                            >Trinti</button> -->
+                            <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="onClick($event)">
+        iki trynimo
+      </button>
+      
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary" (click)="onDelete(i)">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <app-group-item *ngIf="selectedGroup" [group]="selectedGroup" [users]="users" [username]="[username]"></app-group-item>
+        </div>
     </div>
+    
+    
+    <hr>
+    <!-- // Input from group-item.coponent.html   -->
+
+
 </div>
 
-
-<hr>
-<!-- // Input from group-item.coponent.html   -->
 
 

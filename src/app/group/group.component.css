@@ -6,8 +6,11 @@
 }
 #groupList li a {
     display: inline-block;
-    min-width: 50%;
+    min-width: 70%;
 }
 #groupList li button {
     min-width: 70px;
+}
+.modal-backdrop  {
+    background-color: transparent;
 }
