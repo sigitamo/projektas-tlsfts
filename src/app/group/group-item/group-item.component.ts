@@ -61,7 +61,8 @@ export class GroupItemComponent implements OnInit {
           console.log('username: ', username, 'was added');
      //this push username to selected group(in group.ts was changed constructor -> usernames: String[])     
       this.group.usernames.push(username);
-        console.log('new users array: ', this.group.usernames, 'Group:', groupname);
+      let length = this.group.usernames.length;
+        console.log('new users array: ', this.group.usernames, 'Group:', groupname, 'members are: ', length);
        
         })
          
