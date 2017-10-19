@@ -1,5 +1,3 @@
-<div id="modalOn">
-
     <h3>Kurti naują grupę</h3>
     <div class="row">
         <div class="col-md-6 col-xs-6">
@@ -12,11 +10,14 @@
                       ngModel 
                       name="groupName"
                       groupName
-                      #groupName=ngModel
+                      
                       required>
                 <hr>
                 <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SUKURTI</button>
                 <hr>
+              
+                
+                
               </form>
         </div>
     </div>
@@ -29,8 +30,10 @@
                 <ul class="list-group list-group-flush" id=groupList *ngFor="let group of groups; let i=index; trackBy: trackByName" >
                     <li>
                         <a class="list-group-item list-group-item-action" routerLinkActive="active" style="cursor: pointer;" (click)="getGroup(i)"> 
-                            <span>{{group.name}}</span> 
+                            <span>Pavadinimas: {{group.name}}</span> 
                             <span>sk.: {{group.members}}</span>
+                                                      
+                          
                         </a>
                             <!-- <button 
                             class="btn btn-danger" 
@@ -39,36 +42,38 @@
                          
                             >Trinti</button> -->
                             <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" (click)="onClick($event)">
-        Trinti 
-      </button>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'groupModal' + i" (click)="onClick(i)">
+                            Trinti 
+                        </button>
       
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel"></h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-                Ar tikrai norite ištrinti?
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onNo()">NE</button>
-              <button type="button" class="btn btn-danger" (click)="onDelete(i)">TRINTI</button>
-            </div>
-          </div>
-        </div>
-      </div>
+                        <div class="modal fade" [attr.id]="'groupModal' + i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                </div>
+                                <div class="modal-body">
+                                    Ar tikrai norite ištrinti: <span style="font-size:16px; font-weight:700">{{group.name}}</span> ?
+                                </div>
+                                <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onNo(i)">NE</button>
+                                <button type="button" class="btn btn-danger" (click)="onDelete(i)">TRINTI</button>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
                     </li>
                 </ul>
+
+
             </div>
         </div>
         <div class="col-md-6">
-            <app-group-item *ngIf="selectedGroup" [group]="selectedGroup" [users]="users" [username]="[username]"></app-group-item>
+            <app-group-item (changeGroup)="onChangeGroup($event)" *ngIf="group" [group]="group" [users]="users" [username]="[username]"></app-group-item>
         </div>
     </div>
     
@@ -77,7 +82,7 @@
     <!-- // Input from group-item.coponent.html   -->
 
 
-</div>
+
 
 
 

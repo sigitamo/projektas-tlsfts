@@ -4,7 +4,7 @@ import { HttpClient, HttpParams, HttpErrorResponse, HttpResponse } from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+// import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 
 import { ConfigService } from '../config.service';
 import { Group } from './group';
@@ -21,16 +21,29 @@ export class GroupComponent implements OnInit {
   groups: any;
   users: any;
   groupName: string;
-  selectedGroup: Group;
+  group: any;
   groupsChanged = new Subject<GroupComponent[]>();
+  groupChanged = new Subject<Group>();
   text: string;
+  length: any;
+
+  onChangeGroup(event) {
+    console.log('event received:', event);
+    var id;
+    this.groups.forEach(grp => {
+      if (grp.name == event.name) {
+        id = this.groups.indexOf(grp);
+      }
+    });
+    this.groups[id] = event;
+  }
 
   constructor(
         private httpClient: HttpClient,
         private fromConfig: ConfigService,
         private router: Router,
         private route: ActivatedRoute, 
-        public dialog: MatDialog
+        // public dialog: MatDialog
   ) { }
 
 
@@ -77,8 +90,13 @@ export class GroupComponent implements OnInit {
        data=> {
          console.log(data);
       //this push new groupName to array without reload
-       this.groups.push({name: groupName});
-        console.log('po sukurimo grupes',this.groups);
+       this.groups.push({name: groupName, members: 0});
+      //  this.groupName; - console.log gaunasi undefined
+      // this.groups.members - console.log gaunasi undefined
+
+
+      //  this.groups.push({name: groupName, members: 0});
+        console.log('po sukurimo grupes',this.groups, 'length of group', this.groups.length);
        },
        (err: HttpErrorResponse) => {
         if(err.error instanceof Error) {
@@ -92,8 +110,8 @@ export class GroupComponent implements OnInit {
 
   onDelete(index: number ) {
     var groupName = this.groups[index].name.valueOf();
-    var groupMembersCount = this.groups[index].members.valueOf();
-    console.log('GRUPĖ TURI : ',groupMembersCount, 'NARIŲ');
+    // var groupMembersCount = this.groups[index].members.valueOf();
+    // console.log('GRUPĖ TURI : ',groupMembersCount, 'NARIŲ');
   
     this.httpClient.delete('http://' + this.url + '/group', {
       params: new HttpParams().set('name', groupName)
@@ -120,68 +138,73 @@ export class GroupComponent implements OnInit {
       params: new HttpParams().set('name', groupName)
     }).subscribe(
       data => {
-        this.selectedGroup = <Group>data;
+        
+        this.group = <Group>data;
         console.log('getGroup', groupName);
-        var groupUsernames = this.selectedGroup.usernames;
+       
+        
+        var groupUsernames = this.group.usernames;
+        console.log('usernames before foreach: ',this.group.usernames)
         for (var index = 0; index < groupUsernames.length; index++) {
           var username = groupUsernames[index];
-          console.log('USERNAMEs', username);
-          
+          this.length = groupUsernames.length;
+          console.log('USERNAMEs', username, 'members length: ', this.length);
+         
         }
-
+        
       }
+      
     );
    
-
+    
     
   }
-  onClick(event) {
-    var modalOpen = document.getElementById("exampleModal").setAttribute("class", "show")
-   
-   
-    console.log('kk')
-    
-  }
-  onNo() {
-    var closeModal = document.getElementById("exampleModal").setAttribute("class", "hide")
+  onClick(index: number) {
+    var modalOpen = document.getElementById("groupModal" + index).setAttribute("class", "show");
+     
+    console.log('on MODAL set Atribute show');
   }
 
+  onNo(index: number) {
+    var closeModal = document.getElementById("groupModal" + index).setAttribute("class", "hide");
+  }
 
- openDialog(): void {
-  let dialogRef = this.dialog.open(DialogGroupsText, {
-    width: '250px',
-    data: {text: 'TRINTI'}
-  });
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log('The dialog was closed');
-    this.text = result;
-  })
- }
+//  openDialog(): void {
+//   let dialogRef = this.dialog.open(DialogGroupsText, {
+//     width: '250px',
+//     data: {text: 'TRINTI'}
+//   });
+
+//   dialogRef.afterClosed().subscribe(result => {
+//     console.log('The dialog was closed');
+//     this.text = result;
+//   })
+//  }
 
 }
 
 
-@Component({
-  selector: 'app-dialog-groups-text',
-  templateUrl: './dialog-groups-text.html'  
-})
-export class DialogGroupsText {
+// @Component({
+//   selector: 'app-dialog-groups-text',
+//   templateUrl: './dialog-groups-text.html'  
+// })
+// export class DialogGroupsText {
   
     
   
-    constructor(
-        public dialogRef: MatDialogRef<DialogGroupsText>,
-        @Inject(MAT_DIALOG_DATA) public data: any,
-        private groupComponent: GroupComponent) { }
+//     constructor(
+//         public dialogRef: MatDialogRef<DialogGroupsText>,
+//         @Inject(MAT_DIALOG_DATA) public data: any,
+//         private groupComponent: GroupComponent) { }
   
-    onNoClick(): void {
-      this.dialogRef.close();
-    }
-    onDelete(index: number): void {
-      this.groupComponent.onDelete(index);
-      console.log(index);
-      this.dialogRef.close();
-    }
+//     onNoClick(): void {
+//       this.dialogRef.close();
+//     }
+//     onDelete(index: number): void {
+//       this.groupComponent.onDelete(index);
+//       console.log(index);
+//       this.dialogRef.close();
+//     }
   
-  }
+//   }

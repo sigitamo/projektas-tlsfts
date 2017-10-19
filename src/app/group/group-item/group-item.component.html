@@ -5,6 +5,7 @@
         <li>{{name}}</li>
     </ul>
     <h5><span>Viso narių: </span>  {{group.usernames.length}}: </h5>   
+
     <hr>
     <div>
       <h4>Pridėti narių</h4>
@@ -29,7 +30,7 @@
           <input name="groupname" groupname #groupname=ngModel [(ngModel)]="group.name" placeholder="name"/> -->
       
          <hr>
-        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button>
+        <button (click)="onClick(group)" class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button>
         <hr>
         
        

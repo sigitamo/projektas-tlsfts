@@ -28,7 +28,7 @@ import { GroupComponent } from './group/group.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { UserService } from './user/user.service';
 import { GroupItemComponent } from './group/group-item/group-item.component';
-import { DialogGroupsText } from './group/group.component';
+// import { DialogGroupsText } from './group/group.component';
 
 
 @NgModule({
@@ -47,11 +47,11 @@ import { DialogGroupsText } from './group/group.component';
     GroupComponent,
     AdminpanelComponent,
     GroupItemComponent,
-    DialogGroupsText
+    // DialogGroupsText
   ],
-  entryComponents: [
-    DialogGroupsText
-  ],
+  // entryComponents: [
+  //   DialogGroupsText
+  // ],
   imports: [
     BrowserModule,
     CommonModule,
@@ -61,7 +61,7 @@ import { DialogGroupsText } from './group/group.component';
     BrowserAnimationsModule,
     AgmCoreModule.forRoot({apiKey: 'AIzaSyBdpoVlT7F8kK5eX50grCeJLB-4BDyBLBo'}),
     AgmSnazzyInfoWindowModule,
-    MatDialogModule
+    // MatDialogModule
   ],
  
   exports: [

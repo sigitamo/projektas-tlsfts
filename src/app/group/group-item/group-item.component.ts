@@ -1,4 +1,4 @@
-import { Component, Input , OnInit } from '@angular/core';
+import { Component, Input , Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { NgForm, FormControl, FormGroup } from '@angular/forms';
@@ -27,8 +27,16 @@ export class GroupItemComponent implements OnInit {
   @Input() username: User;
   @Input() groups: Group[];
 
+  // @Output() changeGroup = new EventEmitter<Group>();
+  //
+  @Output() changeGroup: EventEmitter<any> = new EventEmitter<any>();
 
+  changed = false;
 
+  onClick() {
+    this.changeGroup.emit(this.group);
+    this.changed = true;
+  }
 
   constructor(
         private route: ActivatedRoute,
@@ -41,9 +49,8 @@ export class GroupItemComponent implements OnInit {
     this.url = this.fromConfig.urlServer.valueOf();
   }
 
-  onAddUser() {
-  console.log('prideti')
-    }
+  
+    
 
     addUser(form: NgForm) {
       const formGroupUsers = new FormGroup({
@@ -57,18 +64,20 @@ export class GroupItemComponent implements OnInit {
       this.httpClient.post('http://' + this.url + '/group/addUser', JSON.stringify({groupname, username}), {responseType: 'text'})
       .subscribe(
         data=> {
-          // username = data.valueOf();
+         // username = data.valueOf();
           console.log('username: ', username, 'was added');
      //this push username to selected group(in group.ts was changed constructor -> usernames: String[])     
       this.group.usernames.push(username);
       let length = this.group.usernames.length;
-        console.log('new users array: ', this.group.usernames, 'Group:', groupname, 'members are: ', length);
-       
+      this.group.members = length;
+      return length;
+        // console.log('new users array: ', this.group.usernames, 'Group:', groupname, 'members are: ', length);
         })
-         
-       
         form.reset();
+        
     }
+
+   
 
     onSelectUser(user: string) {
      
@@ -76,5 +85,6 @@ export class GroupItemComponent implements OnInit {
       console.log(user + ' was selected');
       return this.selectedUserName;
     }
+   
   
 }
