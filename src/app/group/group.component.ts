@@ -29,13 +29,13 @@ export class GroupComponent implements OnInit {
 
   onChangeGroup(event) {
     console.log('event received:', event);
-    var id;
+    var index;
     this.groups.forEach(grp => {
       if (grp.name == event.name) {
-        id = this.groups.indexOf(grp);
+        index = this.groups.indexOf(grp);
       }
     });
-    this.groups[id] = event;
+    this.groups[index] = event;
   }
 
   constructor(
@@ -126,9 +126,6 @@ export class GroupComponent implements OnInit {
         console.log('delete', groupName);
       }
     );
- 
-   
-    
   }
 
   getGroup(index: number) {
@@ -147,11 +144,13 @@ export class GroupComponent implements OnInit {
         console.log('usernames before foreach: ',this.group.usernames)
         for (var index = 0; index < groupUsernames.length; index++) {
           var username = groupUsernames[index];
+       
           this.length = groupUsernames.length;
-          console.log('USERNAMEs', username, 'members length: ', this.length);
+          
          
         }
-        
+        let usernames = groupUsernames;
+        console.log('USERNAMEs', usernames, 'members length: ', this.length);
       }
       
     );

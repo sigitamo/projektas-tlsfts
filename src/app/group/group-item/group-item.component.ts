@@ -1,9 +1,10 @@
 import { Component, Input , Output, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { NgForm, FormControl, FormGroup } from '@angular/forms';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
+import { Subject } from 'rxjs/Subject';
 
 import { Group } from '../group'; 
 import { User } from '../../user/user';
@@ -14,21 +15,18 @@ import { ConfigService } from '../../config.service';
   templateUrl: './group-item.component.html',
   styleUrls: ['./group-item.component.css']
 })
+
 export class GroupItemComponent implements OnInit {
- url = '';
- groupName: string;
- userName: string;
- selectedUserName: string;
+  url = '';
+  groupName: string;
+  userName: string;
+  selectedUserName: string;
 
-
- 
   @Input() group: Group;
   @Input() users: User[];
   @Input() username: User;
   @Input() groups: Group[];
 
-  // @Output() changeGroup = new EventEmitter<Group>();
-  //
   @Output() changeGroup: EventEmitter<any> = new EventEmitter<any>();
 
   changed = false;
@@ -49,42 +47,59 @@ export class GroupItemComponent implements OnInit {
     this.url = this.fromConfig.urlServer.valueOf();
   }
 
-  
-    
-
-    addUser(form: NgForm) {
-      const formGroupUsers = new FormGroup({
-        groupName: new FormControl(form.value.groupname),
-        userName: new FormControl(form.value.username)
-      });
-  
+  addUser(form: NgForm) {
+    const formGroupUsers = new FormGroup({
+      groupName: new FormControl(form.value.groupname),
+      userName: new FormControl(form.value.username)
+    });
       var groupname = this.group.name;
       var username = form.value.username;
 
-      this.httpClient.post('http://' + this.url + '/group/addUser', JSON.stringify({groupname, username}), {responseType: 'text'})
-      .subscribe(
-        data=> {
-         // username = data.valueOf();
-          console.log('username: ', username, 'was added');
-     //this push username to selected group(in group.ts was changed constructor -> usernames: String[])     
-      this.group.usernames.push(username);
-      let length = this.group.usernames.length;
-      this.group.members = length;
-      return length;
-        // console.log('new users array: ', this.group.usernames, 'Group:', groupname, 'members are: ', length);
-        })
-        form.reset();
-        
-    }
+    this.httpClient.post('http://' + this.url + '/groupmember', 
+      null, {
+        params: new HttpParams().set('username', username).append("groupname", groupname),
+        responseType: 'text'
+      })
+        .subscribe(
+          data=> {
+            console.log('username: ', username, 'was added');
+      
+            this.group.usernames.push(username);
+            let length = this.group.usernames.length;
+            this.group.members = length;
+            return length;
+          });
+      form.reset();
+  }
 
-   
+  onSelectUser(user: string) {
+    
+    this.selectedUserName = user;
+    console.log(user + ' was selected');
+    return this.selectedUserName;
+  }
 
-    onSelectUser(user: string) {
-     
-      this.selectedUserName = user;
-      console.log(user + ' was selected');
-      return this.selectedUserName;
-    }
-   
+  onDelete(name: string){
+    
+    var groupName = this.group.name.valueOf();
+    console.log('onDelete name:', name)
+    
+    this.httpClient.delete('http://' + this.url + '/groupmember', {
+        params: new HttpParams().set('username', name).append("groupname", groupName),
+        responseType: 'text'
+    }).subscribe(
+          resp => {
+            ////remove member from members.length
+            let index = this.group.usernames.indexOf(name);
+            this.group.usernames.splice(index, 1);
+            this.group.usernames.slice();
+            
+            ///// goes to output to parent - group.component and remove member from members.length
+            this.group.members = this.group.usernames.length;
+            this.onClick();
+            console.log('name: ', name, ', was deleted');
+          }  
+      )
+  }
   
 }
