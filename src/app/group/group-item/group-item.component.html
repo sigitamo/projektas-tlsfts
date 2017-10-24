@@ -1,12 +1,15 @@
-<div id="groupItem">
+<div id="groupItem" class="hide">
     <h4>
-        <span>Grupė: </span>   
+        <span>Grupės </span>   
         {{group.name}}
+        <span>nariai: </span>
     </h4>
     
     <ul *ngFor="let name of group.usernames; let i=index;">
-        <li>{{name}}</li> 
-        <button (click)="onDelete(name)" type="button" class="btn btn-danger">x</button>
+        <li><span>{{name}}</span>
+                <button (click)="onDelete(name)" type="button" class="btn btn-danger">Trinti</button>    
+        </li> 
+       
     </ul>
     <h5>
         <span>Viso narių: </span>  

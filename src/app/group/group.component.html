@@ -1,6 +1,6 @@
     <h3>Kurti naują grupę</h3>
     <div class="row">
-        <div class="col-md-6 col-xs-6">
+        <div class="col-md-10 col-xs-10">
             <form (ngSubmit)="onSubmit(f)" #f="ngForm" [hidden]="submitted">
                 <label for="groupName">Grupės vardas</label>
                 <input 
@@ -30,29 +30,26 @@
                 <ul class="list-group list-group-flush" id=groupList *ngFor="let group of groups; let i=index; trackBy: trackByName" >
                     <li>
                         <a class="list-group-item list-group-item-action" routerLinkActive="active" style="cursor: pointer;" (click)="getGroup(i)"> 
-                            <span>Pavadinimas: {{group.name}}</span> 
+                            <span>{{group.name}}</span> 
                             <span>sk.: {{group.members}}</span>
-                                                      
-                          
                         </a>
-                            <!-- <button 
-                            class="btn btn-danger" 
-                            type="button" 
-                            (click)="onDelete(i)"
-                         
-                            >Trinti</button> -->
+                            <!-- If members ==0 -->
+                            <button *ngIf="group.members==0" class="btn btn-danger" type="button" (click)="onDelete(i)">
+                                Trinti
+                            </button>
+
                             <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'groupModal' + i" (click)="onClick(i)">
-                            Trinti 
-                        </button>
+                            <button *ngIf="group.members>0" type="button" class="btn btn-primary" data-toggle="modal" data-target="#'groupModal' + i" (click)="onClick(i)">
+                                Trinti 
+                            </button>
       
-      <!-- Modal -->
+                            <!-- Modal -->
                         <div class="modal fade" [attr.id]="'groupModal' + i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel"></h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNo(i)">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                                 </div>

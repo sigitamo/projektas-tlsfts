@@ -16,7 +16,7 @@ import { UserService } from './user.service';
 export class UserComponent implements OnInit {
   users: any;
   user: string;
-  group: string;
+  group: any;
   groups: any;
   user_roles: String[];
   url = '';
@@ -26,17 +26,44 @@ export class UserComponent implements OnInit {
 
   selectedUser: User;
   selectedGroup: Group;
+  
 
   onSelect(user: User): void {
     this.selectedUser = user;
   }
 
   //////UNDEFINED
-  onSelectGroup(group: Group, index: number, name: string) {
-    this.selectedGroup = group;
-    console.log('grupė pažymėta', this.selectedGroup);
-  }
+onSelectGroup(index: number, name: string) {
+  let i = index;
+  let group = this.groups[i].name; 
+  console.log('grupė pažymėta', group);
+}
 
+setNewGroup(name: any): void {
+  // let curGroups: any = this.groups[0];
+  console.log('group Name is: ', name);
+  // curGroups = this.groups.filter(value => value.name);
+  // let index;
+  // let curGroup = curGroups.forEach(gr => {
+  //  if(gr.name == name) {
+  //    index = curGroups.indexOf(gr)
+  //  }
+  //   console.log('currentGroup:', gr.name );
+  // });
+  // curGroups[index] = name;
+  // console.log('this currentGroups: ',curGroups);
+}
+
+
+  // ongetGroup(index: number) {
+  //  this.userService.getGroup(index)
+  //  .subscribe( 
+  //    data =>  { 
+     
+  //    console.log ('get group cnsolelog', data);
+  // });
+    
+  // }
 
   constructor(
         private fromConfig: ConfigService,
@@ -65,12 +92,15 @@ export class UserComponent implements OnInit {
       this.httpClient.get('http://' + this.url + '/groups')
       .subscribe(
         data => {
+         
           this.groups = data;
           console.log('this is groups: ', this.groups);
         }
       )
   }
   
+
+
   onDeleteUser() {
     this.userService.deleteUser(this.user);
     this.router.navigate(['/adminpanel']);

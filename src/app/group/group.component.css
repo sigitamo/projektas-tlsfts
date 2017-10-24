@@ -1,8 +1,5 @@
 #groupList li {
     list-style: none;
-    
-    
-     
 }
 #groupList li a {
     display: inline-block;
@@ -10,7 +7,4 @@
 }
 #groupList li button {
     min-width: 70px;
-}
-.modal-backdrop.show  {
-    background-color: transparent;
 }
