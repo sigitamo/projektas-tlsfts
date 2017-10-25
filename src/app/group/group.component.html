@@ -70,7 +70,8 @@
             </div>
         </div>
         <div class="col-md-6">
-            <app-group-item (changeGroup)="onChangeGroup($event)" *ngIf="group" [group]="group" [users]="users" [username]="[username]"></app-group-item>
+                <!-- [hidden]="groupDeleted==true" -->
+            <app-group-item (changeGroup)="onChangeGroup($event)" *ngIf="group" [group]="group" [users]="users" [username]="[username]" [hidden]="groupDeleted==true"></app-group-item>
         </div>
     </div>
     

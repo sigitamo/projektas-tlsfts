@@ -32,14 +32,7 @@ export class UserComponent implements OnInit {
     this.selectedUser = user;
   }
 
-  //////UNDEFINED
-onSelectGroup(index: number, name: string) {
-  let i = index;
-  let group = this.groups[i].name; 
-  console.log('grupė pažymėta', group);
-}
-
-setNewGroup(name: any): void {
+onSelectGroup(name: any): void {
   // let curGroups: any = this.groups[0];
   console.log('group Name is: ', name);
   // curGroups = this.groups.filter(value => value.name);

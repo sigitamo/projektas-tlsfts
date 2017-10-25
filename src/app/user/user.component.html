@@ -6,8 +6,7 @@
     <td>El.paštas</td>
     <td>Telefono Nr.</td>
     <td>GRUPĖ</td>
-    <td>...</td>
-  </thead>
+    
   
   <tbody>
     <tr *ngFor="let user of users"
@@ -15,14 +14,14 @@
       <td>{{user.username}}</td>
       <td>{{user.email}}</td>
       <td>{{user.phone}}</td>
-      <td>
+      <!-- <td>
         <select *ngFor="let group of groups; let i = index" (click)="onSelectGroup(i)">
           <option >{{group.name}}</option>
         </select>
-     </td>
+     </td> -->
 
-     <td>
-        <!-- <ng-container *ngFor="let g of groups; let i= index">
+     <!-- <td>
+        <ng-container *ngFor="let g of groups; let i= index">
         <select (click)="onSelectGroup(i)">
             
               <ng-container *ngIf="g.name" >
@@ -30,17 +29,17 @@
               </ng-container>
            
         </select>
-      </ng-container> -->
-     </td>
+      </ng-container>
+     </td> -->
      <td>
-        <select #selectElem (click)="setNewGroup(selectElem.value)">
+        <select #selectElem (click)="onSelectGroup(selectElem.value)">
             <option *ngFor="let group of groups">
                 {{group.name}}
             </option>
         </select>
      </td>
 
-     <td *ngIf="selectedGroup" >{{group[i].name}}</td>
+    
      <!-- <td><button class="btn-danger" (click)="onDeleteUser(username)">x</button></td> -->
     
     </tr>

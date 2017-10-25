@@ -21,6 +21,7 @@ export class GroupComponent implements OnInit {
   group: any;
   groupsChanged = new Subject<GroupComponent[]>();
   length: any;
+  groupDeleted: boolean = false;
 
   onChangeGroup(event) {
     console.log('event received:', event);
@@ -111,15 +112,18 @@ export class GroupComponent implements OnInit {
               console.log('error resp: ', resp)
           }
           console.log('delete', groupName);
-          //this set hide class on #groupItem
-          var closeGroupItems = document.getElementById("groupItem").setAttribute("class", "hide");
-    console.log('closeGroupItem');
+         
+          //this hide group-list after delete
+         this.groupDeleted = true;
         }
     );
+   
   }
  
   getGroup(index: number) {
-  
+    //this show group-list
+    this.groupDeleted = false;
+
     var groupName = this.groups[index].name.valueOf();
    
     this.httpClient.get('http://' + this.url + '/group', {
@@ -137,10 +141,6 @@ export class GroupComponent implements OnInit {
           }
           let usernames = groupUsernames;
           console.log('this group users: ', usernames, 'members length: ', this.length);
-          //this set class !hide in #groupItem
-          let openGroupItems = document.getElementById("groupItem").setAttribute("class", "!hide");
-          console.log('openGroupItem');
-
         }
      );
   }
