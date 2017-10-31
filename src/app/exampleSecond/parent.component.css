@@ -1,0 +1,22 @@
+.colorGrey {
+    background-color: rgb(236, 231, 231)
+}
+
+.colorBlue {
+    background-color: rgb(199, 236, 247);
+}
+
+.colorGreen {
+    background-color: rgb(205, 243, 205);
+}
+
+#parentGroupList li {
+    list-style: none;
+}
+#parentGroupList li a {
+    display: inline-block;
+    min-width: 70%;
+}
+#parentGroupList li button {
+    min-width: 70px;
+}

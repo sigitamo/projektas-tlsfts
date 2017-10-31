@@ -6,52 +6,22 @@
     <td>El.paštas</td>
     <td>Telefono Nr.</td>
     <td>GRUPĖ</td>
-    
   
   <tbody>
-    <tr *ngFor="let user of users"
-    (click)="onSelect(user)">
-      <td>{{user.username}}</td>
+    <tr *ngFor="let user of users; let i=index; trackBy: trackByName">
+      <td (click)="onSelect(user)" style="cursor: pointer">{{user.username}}</td>
       <td>{{user.email}}</td>
       <td>{{user.phone}}</td>
-      <!-- <td>
-        <select *ngFor="let group of groups; let i = index" (click)="onSelectGroup(i)">
-          <option >{{group.name}}</option>
-        </select>
-     </td> -->
-
-     <!-- <td>
-        <ng-container *ngFor="let g of groups; let i= index">
-        <select (click)="onSelectGroup(i)">
-            
-              <ng-container *ngIf="g.name" >
-                <option [ngValue]="g" >{{g.name}} ({{g.members}})</option>
-              </ng-container>
-           
-        </select>
-      </ng-container>
-     </td> -->
-     <td>
-        <select #selectElem (click)="onSelectGroup(selectElem.value)">
-            <option *ngFor="let group of groups">
-                {{group.name}}
-            </option>
-        </select>
-     </td>
-
-    
+      <td>
+          <select #selectElem (click)="onSelectGroup(selectElem.value)">
+              <option *ngFor="let group of groups; let i=index">
+                  {{group.name}} ({{group.members}})
+              </option>
+          </select>
+      </td>
      <!-- <td><button class="btn-danger" (click)="onDeleteUser(username)">x</button></td> -->
-    
     </tr>
-   
   </tbody>
 </table>
-<!-- <div *ngIf="selectedUser">
-  <h2>{{selectedUser.name}} details!</h2>
-  
-  <button type="button" (click)="onDeleteUser()">Delete user</button>
-  <div>
-    <label>name: </label>
-    <input [(ngModel)]="selectedUser.name" placeholder="name"/>
-  </div>
-</div> -->
+
+    

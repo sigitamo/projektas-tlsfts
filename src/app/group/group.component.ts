@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { HttpClient, HttpParams, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,6 +22,7 @@ export class GroupComponent implements OnInit {
   groupsChanged = new Subject<GroupComponent[]>();
   length: any;
   groupDeleted: boolean = false;
+
 
   onChangeGroup(event) {
     console.log('event received:', event);
@@ -112,7 +113,7 @@ export class GroupComponent implements OnInit {
               console.log('error resp: ', resp)
           }
           console.log('delete', groupName);
-         
+        
           //this hide group-list after delete
          this.groupDeleted = true;
         }
@@ -145,7 +146,7 @@ export class GroupComponent implements OnInit {
      );
   }
   
-  onClick(index: number) {
+  onModalClick(index: number) {
     var modalOpen = document.getElementById("groupModal" + index).setAttribute("class", "show");
     console.log('on MODAL - set Atribute show');
   }

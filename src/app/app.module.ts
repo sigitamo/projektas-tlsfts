@@ -27,7 +27,9 @@ import { GroupComponent } from './group/group.component';
 import { AdminpanelComponent } from './adminpanel/adminpanel.component';
 import { UserService } from './user/user.service';
 import { GroupItemComponent } from './group/group-item/group-item.component';
-
+import { ParentComponent } from './exampleSecond/parent.component';
+import { ChildOneOneComponent } from './exampleSecond/childOne.component';
+import { ChildTwoTwoComponent } from './exampleSecond/childTwo.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +47,9 @@ import { GroupItemComponent } from './group/group-item/group-item.component';
     GroupComponent,
     AdminpanelComponent,
     GroupItemComponent,
+    ParentComponent,
+    ChildOneOneComponent,
+    ChildTwoTwoComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +73,8 @@ import { GroupItemComponent } from './group/group-item/group-item.component';
     ConfigService,
     AuthService,
     UserService,
-    GroupComponent
+    GroupComponent,
+    UserComponent
   ],
   bootstrap: [AppComponent]
 })

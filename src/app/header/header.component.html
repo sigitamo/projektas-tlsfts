@@ -1,30 +1,29 @@
 <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <div class="navbar-header">
-              <a routerLink="/" class="navbar-brand">NAMŲ puslapis</a>
-            </div>
-            <ul class="nav navbar-nav">
-              <ng-template [ngIf]="authService.isAuthenticated()">
-                <li routerLinkActive="active"><a routerLink="/map">Žemėlapis</a></li>
-              </ng-template>
-            <!-- <li routerLinkActive="active"><a href="/googlemap">Google Žemėlapis</a></li> -->
-            </ul>
-            
-            <ul class="nav navbar-nav navbar-right">
-              <!-- <ng-template [ngIf]="authService.isAuthenticated()"> -->
-                <li><a routerLink="/adminpanel" routerLinkActive="active" style="cursor: pointer;">ADMINISTRAVIMAS</a></li>  
-              <!-- </ng-template> -->
-               
-              <ng-template [ngIf]="!authService.isAuthenticated()">
-                  <li><a routerLink="/registration" style="cursor:pointer;" routerLinkActive="active">UŽSIREGISTRUOTI</a></li>
-                  <li><a routerLink="/login" style="cursor:pointer;" routerLinkActive="active">PRISIJUNGTI</a></li>
-              </ng-template>
-              
-              <ng-template [ngIf]="authService.isAuthenticated()">
-                  <li ><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
-              </ng-template> 
-            </ul>
-        
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a routerLink="/" class="navbar-brand">NAMŲ puslapis</a>
         </div>
+        <ul class="nav navbar-nav">
+          <ng-template [ngIf]="authService.isAuthenticated()">
+            <li routerLinkActive="active"><a routerLink="/map">Žemėlapis</a></li>
+          </ng-template>
+        <!-- <li routerLinkActive="active"><a href="/googlemap">Google Žemėlapis</a></li> -->
+        </ul>
+        
+        <ul class="nav navbar-nav navbar-right">
+          <!-- <ng-template [ngIf]="authService.isAuthenticated()"> -->
+            <li><a routerLink="/adminpanel" routerLinkActive="active" style="cursor: pointer;">ADMINISTRAVIMAS</a></li>  
+          <!-- </ng-template> -->
+            
+          <ng-template [ngIf]="!authService.isAuthenticated()">
+              <li><a routerLink="/registration" style="cursor:pointer;" routerLinkActive="active">UŽSIREGISTRUOTI</a></li>
+              <li><a routerLink="/login" style="cursor:pointer;" routerLinkActive="active">PRISIJUNGTI</a></li>
+          </ng-template>
+          
+          <ng-template [ngIf]="authService.isAuthenticated()">
+              <li ><a style="cursor: pointer;" (click)="onLogout()">Logout</a></li>
+          </ng-template> 
+        </ul>
+    </div>
 </nav>
       

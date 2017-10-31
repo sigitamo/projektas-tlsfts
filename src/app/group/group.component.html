@@ -10,7 +10,7 @@
                       ngModel 
                       name="groupName"
                       groupName
-                      
+                      [(ngModel)]="groupName" 
                       required>
                 <hr>
                 <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SUKURTI</button>
@@ -39,7 +39,7 @@
                             </button>
 
                             <!-- Button trigger modal -->
-                            <button *ngIf="group.members>0" type="button" class="btn btn-primary" data-toggle="modal" data-target="#'groupModal' + i" (click)="onClick(i)">
+                            <button *ngIf="group.members>0" type="button" class="btn btn-primary" data-toggle="modal" data-target="#'groupModal' + i" (click)="onModalClick(i)">
                                 Trinti 
                             </button>
       

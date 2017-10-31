@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-md-6 col-xs-6 colorGrey" id="groupDiv">
+        <h3>Kurti naują grupę</h3>
+        <form (ngSubmit)="onAddGroup(f)" #f="ngForm" [hidden]="submitted">
+            <label for="groupName">Grupės vardas</label>
+            <input 
+                  type="text" 
+                  id="groupName"
+                  class="form-control"
+                  ngModel 
+                  name="groupName"
+                  groupName
+                  [(ngModel)]="groupName" 
+                  required>
+            <hr>
+            <button class="btn btn-primary" type="submit" [disabled]="!f.valid">SUKURTI</button>
+            <hr>
+        </form>
+   
+            <div class="card">
+                <ul class="list-group list-group-flush" id=parentGroupList *ngFor="let group of groups; let i=index; trackBy: trackByName" >
+                    <li>
+                        <a class="list-group-item list-group-item-action" routerLinkActive="active" style="cursor: pointer;" (click)="onGroup(i); onClickGroupList($event)"> 
+                            <span>{{group.name}}</span> 
+                            <span>sk.: ({{group.members}})</span>
+                        </a>
+                        <!-- If members ==0 -->
+                        <button *ngIf="group.members==0" class="btn btn-danger" type="button" (click)="onDelete(i)">
+                            Trinti
+                        </button>
+    
+                        <!-- Button trigger modal -->
+                        <button *ngIf="group.members>0" type="button" class="btn btn-primary" data-toggle="modal" data-target="#'groupModal' + i" (click)="onModalClick(i)">
+                            Trinti 
+                        </button>
+          
+                        <!-- Modal -->
+                        <div class="modal fade" [attr.id]="'groupModal' + i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onNo(i)">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Ar tikrai norite ištrinti: <span style="font-size:16px; font-weight:700">{{group.name}}</span> ?
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onNo(i)">NE</button>
+                                    <button type="button" class="btn btn-danger" (click)="onDelete(i)">TRINTI</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+    </div>
+        
+    <div class="col-md-6 col-xs-6 colorGreen"  id="userDiv">
+            <app-child-two [users]="users" [groups]="groups"></app-child-two>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-xs-6 colorBlue" id="groupListDiv">
+        <app-child-one 
+            [users]="users" 
+            [username]="[username]" 
+            [group]="group" 
+            [name]="name" 
+            [groupName]="groupName" 
+            [usernames]="usernames" 
+            *ngIf="group" [hidden]="!showMembers" 
+            (onChangedUser)="onChangeGroup($event)">
+        </app-child-one>
+    </div>
+</div>    
+    
+  

@@ -1,0 +1,9 @@
+<div class="col-md-6">
+    <ul *ngFor="let user of users; let i=index">
+        <li >{{user.username}} 
+            <select>
+                <option *ngFor="let group of groups">{{group.name}} sk.:({{group.members}})</option>
+            </select>
+        </li>
+    </ul>
+</div>
