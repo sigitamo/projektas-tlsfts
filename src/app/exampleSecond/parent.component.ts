@@ -30,6 +30,7 @@ export class ParentComponent implements OnInit {
             private fromConfig: ConfigService,
             private httpClient: HttpClient) { }
 
+    //event from Child-1        
     onChangeGroup(event) {
         console.log('event received:', event);
         var index;
@@ -40,6 +41,17 @@ export class ParentComponent implements OnInit {
         });
         this.groups[index] = event;
         }
+    //event from child-2
+    onChangeUser(event) {
+      console.log('event received:', event);
+      var index;
+      this.users.forEach(usr => {
+          if (usr.name == event.name) {
+          index = this.users.indexOf(usr);
+          }
+      });
+      this.users[index] = event;
+      }
 
     ngOnInit() {
         this.url = this.fromConfig.urlServer.valueOf();

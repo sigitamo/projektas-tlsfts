@@ -9,14 +9,15 @@
     </thead>
     <tbody>
         <tr *ngFor="let user of users; let i=index">
-            <td>{{user.username}}</td>
+            <td (click)="onUser(i)" style="cursor: pointer;">{{user.username}}</td>
             <td>{{user.phone}}</td>
             <td>{{user.email}}</td>
+           
             <!-- <select >
                     <option *ngFor="let group of groups; let i=index" ><span (click)="onSelectGroup(i)">{{group.name}} </span>sk.:({{group.members}})</option>
             </select> -->
 
-            <select 
+            <!-- <select 
             type="text" 
             id="groupname"
             class="form-control"
@@ -26,7 +27,32 @@
             #groupname=ngModel
             (change)="onSelectGroup($event.target.value)">
             <option *ngFor="let group of groups; let i = index">{{group.name}}</option>
-        </select>
+        </select> -->
+
+        <td>
+                <div>
+                        <!-- add one User -->
+                        
+                        <form (ngSubmit)="addGroup(f)" #f="ngForm">
+                            <label for="group"></label>
+                            <select 
+                                type="text" 
+                                id="groupname"
+                                class="form-control"
+                                ngModel 
+                                name="groupname"
+                                groupname
+                                #groupname=ngModel
+                                (change)="onSelectGroup($event.target.value)">
+                                <option *ngFor="let group of groups; let i = index">{{group.name}}</option>
+                            </select>
+                            <!-- <button (click)="onChangeGroup()" class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button> -->
+                            <button (click)="onUser(i); onChangeGroup(group)" class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button>
+                            <!-- <button (click)="onUser(i); onChangeGroup(group)" class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button> -->
+                        </form>
+                    </div>
+        </td>
+        <td><button type="button" class="btn btn-danger" (click)="onDelete(i)">Trinti</button></td>
         </tr>
 
     </tbody>

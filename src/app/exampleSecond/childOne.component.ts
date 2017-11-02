@@ -43,7 +43,7 @@ export class ChildOneOneComponent implements OnInit {
     onChangeUser() {
         // this.onChangedUser.next(this.group);
         this.onChangedUser.emit(this.group);
-        console.log('turėtų trinti: ');
+        console.log('turėtų trinti ir vykti emitas nuo child1: ');
         this.changed = true;
     }
 

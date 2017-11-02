@@ -60,7 +60,10 @@
     </div>
         
     <div class="col-md-6 col-xs-6 colorGreen"  id="userDiv">
-            <app-child-two [users]="users" [groups]="groups"></app-child-two>
+            <app-child-two 
+                [users]="users" 
+                [groups]="groups"
+                (onChangedGroup)="onChangeUser($event)"></app-child-two>
     </div>
 
 </div>
