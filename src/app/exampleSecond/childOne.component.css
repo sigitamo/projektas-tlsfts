@@ -1,0 +1,17 @@
+#userListInGroup span {
+    font-size: 12px;
+}
+
+#userListInGroup li {
+    list-style: none;
+}
+
+#userListInGroup li span {
+    display: inline-block;
+    min-width: 50%;
+    font-size: 14px;
+}
+
+#userListInGroup li button {
+    min-width: 70px;
+}

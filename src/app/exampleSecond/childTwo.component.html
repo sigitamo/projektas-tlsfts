@@ -1,9 +1,33 @@
-<div class="col-md-6">
-    <ul *ngFor="let user of users; let i=index">
-        <li >{{user.username}} 
-            <select>
-                <option *ngFor="let group of groups">{{group.name}} sk.:({{group.members}})</option>
-            </select>
-        </li>
-    </ul>
-</div>
+<br>
+<h4>Vartotojų lentelė</h4>
+<table id="usersTable">
+    <thead>
+        <td>Vartojo vardas</td>
+        <td>Telefono numeris</td>
+        <td>el. paštas</td>
+        <td>grupių pasirinkimas</td>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users; let i=index">
+            <td>{{user.username}}</td>
+            <td>{{user.phone}}</td>
+            <td>{{user.email}}</td>
+            <!-- <select >
+                    <option *ngFor="let group of groups; let i=index" ><span (click)="onSelectGroup(i)">{{group.name}} </span>sk.:({{group.members}})</option>
+            </select> -->
+
+            <select 
+            type="text" 
+            id="groupname"
+            class="form-control"
+            ngModel 
+            name="groupname"
+            groupname
+            #groupname=ngModel
+            (change)="onSelectGroup($event.target.value)">
+            <option *ngFor="let group of groups; let i = index">{{group.name}}</option>
+        </select>
+        </tr>
+
+    </tbody>
+</table>

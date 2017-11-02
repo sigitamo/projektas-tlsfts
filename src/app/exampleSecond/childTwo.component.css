@@ -1,0 +1,8 @@
+#usersTable thead td {
+    font-weight: 700;
+  }
+#usersTable tr, td {
+border: 1px solid grey;
+padding: 10px;
+
+}

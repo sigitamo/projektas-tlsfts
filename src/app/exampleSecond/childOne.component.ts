@@ -9,7 +9,8 @@ import { User } from '../user/user';
 
 @Component({
     selector: 'app-child-one',
-    templateUrl: 'childOne.component.html'
+    templateUrl: 'childOne.component.html',
+    styleUrls: ['childOne.component.css']
 })
 
 export class ChildOneOneComponent implements OnInit {
