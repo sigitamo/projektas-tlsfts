@@ -19,7 +19,7 @@ const appRoutes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'googlemap', component: GooglemapComponent},
     {path: 'map', component: MapComponent, 
-    canActivate: [AuthGuard]
+    // canActivate: [AuthGuard]
 }
 ];
 

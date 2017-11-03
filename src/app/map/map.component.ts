@@ -17,7 +17,7 @@ export interface marker{
   lng: number;
 }
 interface user{
-  username?: string
+  username?: string;
 }
 
 @Component({

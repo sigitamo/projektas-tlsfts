@@ -43,7 +43,7 @@
                                 name="groupname"
                                 groupname
                                 #groupname=ngModel
-                                (change)="onSelectGroup($event.target.value)">
+                                (click)="onSelectGroup($event.target.value)">
                                 <option *ngFor="let group of groups; let i = index">{{group.name}}</option>
                             </select>
                             <!-- <button (click)="onChangeGroup()" class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button> -->
@@ -51,7 +51,11 @@
                             <!-- <button (click)="onUser(i); onChangeGroup(group)" class="btn btn-primary" type="submit" [disabled]="!f.valid">PRIDĖTI</button> -->
                         </form>
                     </div>
+         
         </td>
+        
+        <!-- <td *ngIf="user.username===group.name.usernames[i]">{{group.name}}</td>    -->
+
         <td><button type="button" class="btn btn-danger" (click)="onDelete(i)">Trinti</button></td>
         </tr>
 

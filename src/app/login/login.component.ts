@@ -29,7 +29,7 @@ submitted = false;
   }
 
   loginUser() {
-    this.router.navigate(['/map'])
+    this.router.navigate(['/map']);
   }
   
   onSubmit(form: NgForm) {
@@ -53,14 +53,15 @@ submitted = false;
     this.httpClient.post('http://' + this.url + '/login',
       JSON.stringify(formLogin), {responseType: 'text'})
        .subscribe( data => {
-        if (data ==='[ROLE_ADMIN]'){
-          console.log(data);
+        // if (data ==='[ROLE_ADMIN]'){
+        //   console.log(data);
           this.authService.sessionData = "thisLohin";
           this.router.navigate(['/map']);
-        } else if (data ==='[ROLE_USER]'){
-          this.authService.sessionData = "thisLohin";
-          this.router.navigate(['/']);
-        }
+        // } else if (data ==='[ROLE_USER]'){
+        //   this.authService.sessionData = "thisLohin";
+          
+        //   this.router.navigate(['/']);
+        // }
       
       },
         (err: HttpErrorResponse) => {

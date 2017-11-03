@@ -87,19 +87,18 @@ export class ChildTwoTwoComponent implements OnInit {
               data=> {
                  
                 console.log('group: ', groupname, 'was added to User:', username);
-               //1variantas
-                // this.group.usernames.push(username);
-                // let length = this.group.usernames.length;
-                // this.group.members = length;
-                // return length;
-               
-                // 2variantas
-                // var members = this.selectedGroupName.length;
-                // this.group.push(members);
-
-                // 3 variantas Egliau
-                this.group.usernames.push(username);
-                this.group.members += 1;
+              
+                // 3 variantas Egliaus
+                this.group.usernames = [];
+                if(this.group.usernames) {
+                    this.group.usernames.push(username);
+                    this.group.members += 1;
+                    console.log('pavyko. vartotojų sąrašas dabar: ', this.group.usernames);
+                } else {
+                    
+                    console.log('nerandu ką pushinti į:', this.group.usernames);
+                }
+                
             });
           form.reset();
 
