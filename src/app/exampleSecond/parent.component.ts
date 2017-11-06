@@ -41,16 +41,16 @@ export class ParentComponent implements OnInit {
         });
         this.groups[index] = event;
         }
-    //event from child-2
+    //event from child-2 = pakeista vietoje user 5 group
     onChangeUser(event) {
       console.log('event received:', event);
       var index;
-      this.users.forEach(usr => {
-          if (usr.name == event.name) {
-          index = this.users.indexOf(usr);
+      this.groups.forEach(grp => {
+          if (grp.name == event.name) {
+          index = this.groups.indexOf(grp);
           }
       });
-      this.users[index] = event;
+      this.groups[index] = event;
       }
 
     ngOnInit() {

@@ -1,0 +1,28 @@
+button.userAndGroup {
+    background-color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 10px;
+    width: 120px;
+    margin: 0 auto;
+    border-bottom-color: transparent;
+    text-transform: uppercase;
+}
+
+button.userAndGroup:focus {
+    outline: none;
+    background-color: rgb(120, 161, 196);
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-color: solid 1px rgb(245, 245, 245);
+    text-transform: uppercase;
+  
+}
+.underlineButtons {
+    width: 90%;
+    height: 2px;
+    background-color: rgb(235, 235, 235);
+    margin-top: -2px;
+    position: absolute;
+}

@@ -7,6 +7,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule } from '@agm/core';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -70,6 +71,10 @@ import { ChildTwoTwoComponent } from './exampleSecond/childTwo.component';
     useClass: LoggingInterceptor,
     multi: true
   }, 
+  {
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  },
     ConfigService,
     AuthService,
     UserService,

@@ -21,17 +21,13 @@ export class ChildTwoTwoComponent implements OnInit {
     changed = false;
     group: any;
     user: any;
-    // index: number;
     usernames: any;
     usersChanged = new Subject<ChildTwoTwoComponent[]>();
 
     @Input() users: any;
     @Input() groups: any;
-    
     @Output() onChangedGroup: EventEmitter<any> = new EventEmitter<any>() 
-    // @Output() onChangedUser: EventEmitter<any> = new EventEmitter<any>();
    
-
     constructor (
             private httpClient: HttpClient,
             private fromConfig: ConfigService) { }
@@ -39,7 +35,6 @@ export class ChildTwoTwoComponent implements OnInit {
     ngOnInit() {
         this.url = this.fromConfig.urlServer.valueOf();
     }
-
  
     onChangeGroup() {
         this.onChangedGroup.emit(this.group);
@@ -51,7 +46,6 @@ export class ChildTwoTwoComponent implements OnInit {
         this.selectedGroupName = groupname;
         this.groups.forEach(group => {
             if (group.name == groupname) {
-               
                 //Egliaus - sukuriamas objektas group, kad vėliau būtų galma push(username) metode addGroup()
                 this.group = group;
             }
@@ -88,7 +82,7 @@ export class ChildTwoTwoComponent implements OnInit {
                  
                 console.log('group: ', groupname, 'was added to User:', username);
               
-                // 3 variantas Egliaus
+                // 3 variantas Egliaus patobulintas
                 this.group.usernames = [];
                 if(this.group.usernames) {
                     this.group.usernames.push(username);
@@ -104,27 +98,35 @@ export class ChildTwoTwoComponent implements OnInit {
 
     }
 
-   
+    onDelete(index: number) {
+        var username = this.users[index].username.valueOf();  
 
-  onDelete(index: number) {
-    var username = this.users[index].username.valueOf();  
+        console.log('This', username, ' will be deleted');
 
-      console.log('This', username, ' will be deleted');
-
-      this.httpClient.delete('http://' + this.url + '/user', {
+        this.httpClient.delete('http://' + this.url + '/user', {
           params: new HttpParams().set('username', username)
-      })
-      .subscribe(
-          resp => {
-            this.users.splice(index, 1);
-            this.usersChanged.next(this.users.slice());
-            console.log(this.users, 'onDelete procese');
-            if (resp !instanceof HttpErrorResponse) {
-                console.log('error resp: ', resp)
-            }
-            console.log('user', username, 'was deleted;');
-          }
-      )
-  }
+        })
+            .subscribe(
+                resp => {
+                    this.users.splice(index, 1);
+                    this.usersChanged.next(this.users.slice());
+                    console.log(this.users, 'onDelete procese');
+                        if (resp !instanceof HttpErrorResponse) {
+                            console.log('error resp: ', resp)
+                    }
+                    console.log('user', username, 'was deleted;');
+                }
+            )
+    }
+
+    onModalClick(index: number) {
+        var modalOpen = document.getElementById("userModal" + index).setAttribute("class", "show");
+        console.log('turn on UserMODAL - set Atribute show');
+    }
+
+    onNo(index: number) {
+        var closeModal = document.getElementById("userModal" + index).setAttribute("class", "hide");
+        console.log('turn off UserModal - set Attribute hide');
+    }
 
 }

@@ -29,7 +29,7 @@
             <option *ngFor="let group of groups; let i = index">{{group.name}}</option>
         </select> -->
 
-        <td>
+            <td>
                 <div>
                         <!-- add one User -->
                         
@@ -52,11 +52,47 @@
                         </form>
                     </div>
          
-        </td>
+            </td>
         
-        <!-- <td *ngIf="user.username===group.name.usernames[i]">{{group.name}}</td>    -->
+            <!-- <td *ngIf="user.username===group.name.usernames[i]">{{group.name}}</td>    -->
 
-        <td><button type="button" class="btn btn-danger" (click)="onDelete(i)">Trinti</button></td>
+            <td>
+            <!-- <button type="button" class="btn btn-danger" (click)="onDelete(i)">Trinti</button> -->
+        
+                    <!-- Čia pridėtas Modal langas dėl trynimo. Išbandyti 11 06 -->
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#'userModal' + i" (click)="onModalClick(i)">
+                        Trinti 
+                    </button>
+      
+                    <!-- Modal -->
+                    <div class="modal fade" [attr.id]="'userModal' + i" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                                    <button 
+                                        type="button" 
+                                        class="close" 
+                                        data-dismiss="modal" 
+                                        aria-label="Close" 
+                                        (click)="onNo(i)">
+                                        <span aria-hidden="true">&times;</span>
+                                     </button>
+                                </div>
+                                <div class="modal-body">
+                                    Ar tikrai norite ištrinti vartotoją: 
+                                    <span style="font-size:16px; font-weight:700">{{user.username}}</span> ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="onNo(i)">NE</button>
+                                    <button type="button" class="btn btn-danger" (click)="onDelete(i)">TRINTI</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+            </td>
         </tr>
 
     </tbody>

@@ -1,10 +1,16 @@
-<h5>Čia bus Namų puslapio nuotrauka - ŠERNO GALVOS nuotrauka</h5>
+<div class="col-md-10 col-xs-10 col-md-offset-1 col-xs-offset-1">
+    <h5>Čia bus Namų puslapio nuotrauka - ŠERNO GALVOS nuotrauka</h5>
+    
+    <!-- Show groups -->
+    <button (click)="onClickGroup($event)" class="userAndGroup">grupės</button>
+    
+    <!-- Show users -->
+    <button (click)="onClickUser($event)" class="userAndGroup">vartotojai</button>
+    <div class="underlineButtons"></div>
+    
+    <app-parent></app-parent>
 
-<!-- Show groups -->
-<button (click)="onClickGroup($event)">grupės</button>
+</div>
 
-<!-- Show users -->
-<button (click)="onClickUser($event)">vartotojai</button>
 
-<app-parent></app-parent>
 
