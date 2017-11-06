@@ -34,7 +34,15 @@ export class ChildTwoTwoComponent implements OnInit {
 
     ngOnInit() {
         this.url = this.fromConfig.urlServer.valueOf();
+        
+        console.log(this.getMatch(this.array1, this.array2)); 
+        // console.log(this.getMatch(this.grusernames, this.ususernames)); 
+        
+           
+
+        
     }
+
  
     onChangeGroup() {
         this.onChangedGroup.emit(this.group);
@@ -57,7 +65,26 @@ export class ChildTwoTwoComponent implements OnInit {
     onUser(index: number) {
             this.user = this.users[index];
             console.log('selecetd username: ', this.user);
-            return this.user;
+            
+        //    this.userGetGroups(); 
+           return this.user;
+            
+    }
+
+    userGetGroups() {
+        let index: number;
+        this.users.forEach(user => {
+        this.httpClient.get('http://' + this.url + '/user/getGroups', {
+            params: new HttpParams().set('username', user.username)            
+        })
+            .subscribe(
+                data=> {
+                    // return user.groups = data;
+                    user.groups = data;
+                    console.log('User:', user);
+                }
+            )
+       });
     }
 
     addGroup(form: NgForm) {
@@ -95,6 +122,7 @@ export class ChildTwoTwoComponent implements OnInit {
                 
             });
           form.reset();
+             this.userGetGroups(); 
 
     }
 
@@ -128,5 +156,21 @@ export class ChildTwoTwoComponent implements OnInit {
         var closeModal = document.getElementById("userModal" + index).setAttribute("class", "hide");
         console.log('turn off UserModal - set Attribute hide');
     }
+
+    array1 = ["Lukas", "Marta"];
+    array2 = ["admin", "user", "Lukas"];
+    // grusernames = this.group.usernames;
+    // ususernames = this.users.usernames;
+    getMatch(a, b) {
+        let matches = [];
+
+        for ( var i = 0; i < a.length; i++ ) {
+            for ( var e = 0; e < b.length; e++ ) {
+                if ( a[i] === b[e] ) matches.push( a[i] );
+            }
+        }
+        return matches;
+    }
+
 
 }
