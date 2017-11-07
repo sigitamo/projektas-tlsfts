@@ -1,3 +1,4 @@
+/* non-active button */
 button.userAndGroup {
     background-color: white;
     border-top-left-radius: 5px;
@@ -8,17 +9,28 @@ button.userAndGroup {
     border-bottom-color: transparent;
     text-transform: uppercase;
 }
-
+/* without blue-outline in moment of click */
 button.userAndGroup:focus {
     outline: none;
+}
+/* active button */
+.buttonUserOrGroup {
+   
+    padding: 10px;
+    width: 120px;
+    margin: 0 auto;
+    border-bottom-color: transparent;
+    text-transform: uppercase;
     background-color: rgb(120, 161, 196);
     color: white;
+    border-color: solid 1px rgb(245, 245, 245);
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    border-color: solid 1px rgb(245, 245, 245);
     text-transform: uppercase;
-  
+    outline: none;
+    /* border: none; */
 }
+
 .underlineButtons {
     width: 90%;
     height: 2px;
@@ -26,3 +38,4 @@ button.userAndGroup:focus {
     margin-top: -2px;
     position: absolute;
 }
+

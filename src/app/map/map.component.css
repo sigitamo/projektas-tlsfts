@@ -1,14 +1,10 @@
-agm-map {
-    height: 500px;
-}
-
 .card{
     background-color: #e4e4e4;
-    padding: 5px;
+    padding: 1px;
 }
 
 .card-body{
     background-color: white;
-    padding: 5px;
+    padding: 10px;
 }
 

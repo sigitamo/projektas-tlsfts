@@ -30,7 +30,7 @@ interface user{
 export class MapComponent implements OnInit {
   url: string;
   //gooogle maps zoom level
-  zoom: number = 13;
+  zoom: number = 14;
   //initial center position for map
   lat: number = 54.698126;
   lng: number = 25.3190053;

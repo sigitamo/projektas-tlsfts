@@ -1,44 +1,39 @@
 <div class="container-fluid"> 
     <div class="row">
-      <div class="col-sd-8 col-sm-8">
-        <agm-map #gm
-            [latitude]="lat" 
-            [longitude]="lng"
-            [zoom]="zoom"
-            [disableDefaultUI]="false"
-            [zoomControl]="true">
+        <div class="col-sd-8 col-sm-8">
+            <agm-map #gm
+                [latitude]="lat" 
+                [longitude]="lng"
+                [zoom]="zoom"
+                [disableDefaultUI]="false"
+                [zoomControl]="true"
+                class="mapSize">
             
-            <agm-marker 
-                *ngFor="let m of markers; let i=index"
-                (markerClick)="clickedMarker(m.label, i)"
-                [latitude]="m.lat" 
-                [longitude]="m.lng"
-               >
-            <agm-info-window>
-                <strong> {{ m.name }}</strong>
-                
-                <p> Platuma: {{ m.lat }}</p>
-                <p> Ilguma: {{ m.lng }}</p>
-            </agm-info-window>
-            </agm-marker>
-        </agm-map>  
-      </div> 
-
+                <agm-marker 
+                    *ngFor="let m of markers; let i=index"
+                    (markerClick)="clickedMarker(m.label, i)"
+                    [latitude]="m.lat" 
+                    [longitude]="m.lng">
+                        <agm-info-window>
+                            <strong> {{ m.name }}</strong>
+                            <p> Platuma: {{ m.lat }}</p>
+                            <p> Ilguma: {{ m.lng }}</p>
+                        </agm-info-window>
+                </agm-marker>
+            </agm-map>  
+        </div> 
      
-      <div class="col-sd-4 col-sm-4" *ngFor="let m of markers; let i=index">
-        <div class="card">
-            <div class="card-body">
-                <a  (click)="markerClick(m.lat, m.lng)" zoom="zoom"> 
-                    <strong> {{ m.name }}</strong>
-                    <p> Platuma: {{ m.lat }}</p>
-                    <p> Ilguma: {{ m.lng }}</p>
-                </a>
-                
-                
+        <div class="col-sd-4 col-sm-4" *ngFor="let m of markers; let i=index">
+            <div class="card">
+                <div class="card-body">
+                    <a  (click)="markerClick(m.lat, m.lng)" zoom="zoom"> 
+                        <strong> {{ m.name }}</strong>
+                        <p> Platuma: {{ m.lat }}</p>
+                        <p> Ilguma: {{ m.lng }}</p>
+                    </a>
+                </div>
             </div>
         </div>
-    
-      </div>
   
     </div>
-  </div>
+</div>
